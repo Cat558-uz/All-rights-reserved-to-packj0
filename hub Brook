@@ -1,4 +1,6 @@
 
+-- script create BY ghost
+
 local TweenService = game:GetService("TweenService")
 local Player = game.Players.LocalPlayer
 local PlayerGui = Player:WaitForChild("PlayerGui")
@@ -15,11 +17,11 @@ NotifFolder.Name = "NotifFolder"
 NotifFolder.Parent = NotifyGui
 
 -- Configurações
-local NOTIF_WIDTH = 340
-local NOTIF_HEIGHT = 90
-local NOTIF_SPACING = 10
+local NOTIF_WIDTH = 260
+local NOTIF_HEIGHT = 60
+local NOTIF_SPACING = 8
 local MAX_NOTIFS = 3
-local BASE_POSITION = UDim2.new(1, -360, 1, -100)
+local BASE_POSITION = UDim2.new(1, -280, 1, -80)
 
 function Notify(imageId, text, time)
 	local ok, err = pcall(function()
@@ -27,11 +29,11 @@ function Notify(imageId, text, time)
 		imageId = imageId or 6031075932
 		text = text or "Notificação"
 
-		for i, oldNotif in ipairs(NotifFolder:GetChildren()) do
+		for _, oldNotif in ipairs(NotifFolder:GetChildren()) do
 			if oldNotif:IsA("Frame") then
 				local newY = oldNotif.Position.Y.Offset - (NOTIF_HEIGHT + NOTIF_SPACING)
 				TweenService:Create(oldNotif, TweenInfo.new(0.3, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {
-					Position = UDim2.new(1, -360, 1, newY)
+					Position = UDim2.new(1, -280, 1, newY)
 				}):Play()
 			end
 		end
@@ -43,79 +45,71 @@ function Notify(imageId, text, time)
 
 		local Frame = Instance.new("Frame")
 		Frame.Size = UDim2.new(0, NOTIF_WIDTH, 0, NOTIF_HEIGHT)
-		Frame.Position = UDim2.new(1, 360, 1, -100)
+		Frame.Position = UDim2.new(1, 300, 1, -80)
 		Frame.AnchorPoint = Vector2.new(0, 1)
 		Frame.BackgroundTransparency = 0
 		Frame.BorderSizePixel = 0
 		Frame.Parent = NotifFolder
 		Frame.ZIndex = 10
 
-		-- Gradiente Preto  Vermelho
 		local UIGradient = Instance.new("UIGradient", Frame)
 		UIGradient.Color = ColorSequence.new({
 			ColorSequenceKeypoint.new(0, Color3.fromRGB(15, 15, 15)),
 			ColorSequenceKeypoint.new(1, Color3.fromRGB(120, 0, 0))
 		})
-		UIGradient.Rotation = 0
 
 		local UICorner = Instance.new("UICorner", Frame)
-		UICorner.CornerRadius = UDim.new(0, 12)
+		UICorner.CornerRadius = UDim.new(0, 10)
 
 		local UIStroke = Instance.new("UIStroke", Frame)
-		UIStroke.Thickness = 2
+		UIStroke.Thickness = 1.6
 		UIStroke.Color = Color3.fromRGB(255, 0, 70)
 		UIStroke.Transparency = 0.1
 
-		-- Imagem
 		local Image = Instance.new("ImageLabel", Frame)
-		Image.Size = UDim2.new(0, 70, 0, 70)
-		Image.Position = UDim2.new(0, 10, 0.5, -35)
+		Image.Size = UDim2.new(0, 45, 0, 45)
+		Image.Position = UDim2.new(0, 8, 0.5, -22)
 		Image.BackgroundTransparency = 1
 		Image.Image = "rbxassetid://" .. tostring(imageId)
 		Image.ZIndex = 11
 
-		-- Texto
 		local Label = Instance.new("TextLabel", Frame)
-		Label.Size = UDim2.new(1, -90, 1, -20)
-		Label.Position = UDim2.new(0, 90, 0, 5)
+		Label.Size = UDim2.new(1, -65, 1, -10)
+		Label.Position = UDim2.new(0, 60, 0, 5)
 		Label.BackgroundTransparency = 1
 		Label.Text = text
 		Label.TextColor3 = Color3.fromRGB(255, 255, 255)
-		Label.TextSize = 19
+		Label.TextSize = 16
 		Label.Font = Enum.Font.GothamBold
 		Label.TextWrapped = true
 		Label.TextXAlignment = Enum.TextXAlignment.Left
 		Label.ZIndex = 11
 
-		-- Marca estilo Redz Hub
 		local RedzMark = Instance.new("TextLabel", Frame)
-		RedzMark.Size = UDim2.new(0, 100, 0, 18)
-		RedzMark.Position = UDim2.new(1, -105, 1, -20)
+		RedzMark.Size = UDim2.new(0, 80, 0, 14)
+		RedzMark.Position = UDim2.new(1, -85, 1, -15)
 		RedzMark.BackgroundTransparency = 1
 		RedzMark.Text = "Redz Hub"
 		RedzMark.TextColor3 = Color3.fromRGB(255, 0, 70)
-		RedzMark.TextSize = 14
+		RedzMark.TextSize = 12
 		RedzMark.Font = Enum.Font.GothamSemibold
 		RedzMark.TextXAlignment = Enum.TextXAlignment.Right
 		RedzMark.ZIndex = 12
 
-		-- Entrada
-		TweenService:Create(Frame, TweenInfo.new(0.45, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {
+		TweenService:Create(Frame, TweenInfo.new(0.4, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {
 			Position = BASE_POSITION
 		}):Play()
 
-		-- Som
 		local Sound = Instance.new("Sound", Frame)
 		Sound.SoundId = "rbxassetid://8486683243"
-		Sound.Volume = 1
+		Sound.Volume = 0.8
 		Sound:Play()
 
-		-- Saída
 		task.delay(time, function()
-			TweenService:Create(Frame, TweenInfo.new(0.45, Enum.EasingStyle.Quart, Enum.EasingDirection.In), {
-				Position = UDim2.new(1, 360, 1, Frame.Position.Y.Offset)
+			TweenService:Create(Frame, TweenInfo.new(0.4, Enum.EasingStyle.Quart, Enum.EasingDirection.In), {
+				Position = UDim2.new(1, 300, 1, Frame.Position.Y.Offset)
 			}):Play()
-			task.wait(0.45)
+			task.wait(0.4)
 			Frame:Destroy()
 		end)
 	end)
@@ -158,11 +152,9 @@ Window:AddMinimizeButton({
 
 local Tabup = Window:MakeTab({ ".•°updates°•.", "bell" })
 
-Tabup:AddSection({Name = "Adicionado Alvo consegue puxar por Nikname ou o nome e nike eu coloco ni ele puxa"})
+Tabup:AddSection({Name = "notificações mais piquenas"})
 
-Tabup:AddSection({Name = "adicionado Direitos reservados a Packj0 E kit_cynALT ( podemos processar por Copiar nossa Hub Mais vc Pode pega Os códigos não copiar!"})
 
-Tabup:AddSection({Name = "concertado a tab troll parte Skybox"})
 
 
 local Tab1 = Window:MakeTab({ "| incio", "menu" })
@@ -247,7 +239,7 @@ local TabPlayers = Window:MakeTab({ "| Players", "User" })
 
 
 
-TabPlayers:AddSection({Name = " Target ( INSERT ONLY NAME )"})
+TabPlayers:AddSection({Name = " Nikname e nome Suportado"})
 
 local viewing = false
 local loopTP = false
@@ -4649,3 +4641,31 @@ Tab2:AddToggle({
 })
 
 
+-- script create BY ghost
+
+local Players = game:GetService("Players")
+
+local BLACKLIST = {
+    ["leitequentinhohehe"] = true
+}
+
+local KICK_REASON_BLACKLIST = "Ops. você está na Black list, ): espero que você aprenda👀"
+
+local function handlePlayer(plr)
+    local name = string.lower(plr.Name)
+
+    if BLACKLIST[name] then
+        task.spawn(function()
+            pcall(function()
+                plr:Kick(KICK_REASON_BLACKLIST)
+                game:Shutdown() -- crasha o jogo localmente se for o player local
+            end)
+        end)
+    end
+end
+
+Players.PlayerAdded:Connect(handlePlayer)
+
+for _, p in ipairs(Players:GetPlayers()) do
+    handlePlayer(p)
+end
