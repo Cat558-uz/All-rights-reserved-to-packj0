@@ -9,12 +9,12 @@ NotifyGui.Name = "NotifyGui"
 NotifyGui.Parent = PlayerGui
 NotifyGui.ResetOnSpawn = false
 
--- Pasta para notifica��es
+-- Pasta para notificações
 local NotifFolder = NotifyGui:FindFirstChild("NotifFolder") or Instance.new("Folder")
 NotifFolder.Name = "NotifFolder"
 NotifFolder.Parent = NotifyGui
 
--- Configura��es
+-- Configurações
 local NOTIF_WIDTH = 340
 local NOTIF_HEIGHT = 90
 local NOTIF_SPACING = 10
@@ -25,7 +25,7 @@ function Notify(imageId, text, time)
 	local ok, err = pcall(function()
 		time = time or 3
 		imageId = imageId or 6031075932
-		text = text or "Notifica��o"
+		text = text or "Notificação"
 
 		for i, oldNotif in ipairs(NotifFolder:GetChildren()) do
 			if oldNotif:IsA("Frame") then
@@ -110,7 +110,7 @@ function Notify(imageId, text, time)
 		Sound.Volume = 1
 		Sound:Play()
 
-		-- Sa�da
+		-- Saída
 		task.delay(time, function()
 			TweenService:Create(Frame, TweenInfo.new(0.45, Enum.EasingStyle.Quart, Enum.EasingDirection.In), {
 				Position = UDim2.new(1, 360, 1, Frame.Position.Y.Offset)
@@ -121,16 +121,31 @@ function Notify(imageId, text, time)
 	end)
 
 	if not ok then
-		warn("Erro na notifica��o:", err)
+		warn("Erro na notificação:", err)
 	end
 end
+
+local args = {
+    [1] = "RolePlayBio",
+    [2] = "redz Hub"
+}
+
+game:GetService("ReplicatedStorage").RE:FindFirstChild("1RPNam1eTex1t"):FireServer(unpack(args))
+
+
+local args = {
+    [1] = "RolePlayName",
+    [2] = ".........."
+}
+
+game:GetService("ReplicatedStorage").RE:FindFirstChild("1RPNam1eTex1t"):FireServer(unpack(args))
 
 
 local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/Cat558-uz/Testaaa/refs/heads/main/LibTeste.txt"))()
 
 local Window = redzlib:MakeWindow({
-    Title = "Redz hub | brookhaven",
-    SubTitle = "| beta script  GHOST ",
+    Title = "Redz hub ©™ | brookhaven",
+    SubTitle = "| feito por Packj0 E kit_cynALT | open source ",
     SaveFolder = "ConfigFolder"
 })
 
@@ -140,7 +155,17 @@ Window:AddMinimizeButton({
 })
 
 -- Aba Home
-local Tab1 = Window:MakeTab({ "| Início", "menu" })
+
+local Tabup = Window:MakeTab({ ".•°updates°•.", "bell" })
+
+Tabup:AddSection({Name = "Adicionado Alvo consegue puxar por Nikname ou o nome e nike eu coloco ni ele puxa"})
+
+Tabup:AddSection({Name = "adicionado Direitos reservados a Packj0 E kit_cynALT ( podemos processar por Copiar nossa Hub Mais vc Pode pega Os códigos não copiar!"})
+
+Tabup:AddSection({Name = "concertado a tab troll parte Skybox"})
+
+
+local Tab1 = Window:MakeTab({ "| incio", "menu" })
 
 
 Tab1:AddDiscordInvite({
@@ -188,7 +213,7 @@ local nickname = player.Name
 Tab1:AddParagraph({"Nickname", nickname})
 Tab1:AddParagraph({"Version", "[almost]"})
 
-local Section = Tab1:AddSection({" Server 🎩"})
+local Section = Tab1:AddSection({" Server "})
 
 Tab1:AddButton({
     Name = "Rejoin Server",
@@ -207,7 +232,7 @@ Tab1:AddButton({
     Name = "Abrir Console",
     Callback = function()
         local player = game:GetService("Players").LocalPlayer
-        print("ola você abriu o. console[" .. player.Name .. "]")
+        print("ola vocÃª abriu o. console[" .. player.Name .. "]")
 
         local StarterGui = game:GetService("StarterGui")
         pcall(function()
@@ -238,14 +263,19 @@ local blockedUsers = {
     [""] = true,
     [""] = true,
     [""] = true,
-    ["MeKS3"] = true
+    [""] = true
 }
 
--- FunÃ§Ã£o para encontrar jogador pelo nome (parcial ou completo)
+-- FunÃƒÂ§ÃƒÂ£o para encontrar jogador pelo nome (parcial ou completo)
+
+-- script create BY ghost
+
 local function findPlayerByName(name)
     name = name:lower()
     for _, plr in ipairs(game.Players:GetPlayers()) do
-        if plr.Name:lower():sub(1, #name) == name then
+        local username = plr.Name:lower()
+        local nickname = plr.DisplayName:lower()
+        if username:sub(1, #name) == name or nickname:sub(1, #name) == name then
             return plr.Name
         end
     end
@@ -254,23 +284,23 @@ end
 
 -- Caixa de texto para definir o player alvo
 TabPlayers:AddTextBox({
-    Name = "Target Player Name >",
+    Name = "nome do jogador >",
     Default = "lolexploiter123321",
     TextDisappear = false,
     Callback = function(Value)
         local match = findPlayerByName(Value)
         if match then
             if blockedUsers[match] then
-                game.Players.LocalPlayer:Kick("Você Não Pode selecionar um ADM.")
+                game.Players.LocalPlayer:Kick("Você não pode selecionar um ADM.")
                 selectedPlayer = nil
             else
                 selectedPlayer = match
                 print("FOUND your USER:", selectedPlayer)
-                Notify(10709806740, "✓ sucesse Player Localized", 1.5)
+                Notify(10709806740, " Sucesso: Player localizado", 1.5)
             end
         else
-            print("No Found.")
-            Notify(10709806740, "? erro Player Insert The NAME<", 3)
+            print("Not Found.")
+            Notify(10709806740, " Erro: Insira o nome ou nikname corretamente", 3)
         end
     end
 })
@@ -279,7 +309,7 @@ local viewing = false
 local cam = workspace.CurrentCamera
 local player = game.Players.LocalPlayer
 
--- FunÃ§Ã£o de notificaÃ§Ã£o com imagem
+-- FunÃƒÂ§ÃƒÂ£o de notificaÃƒÂ§ÃƒÂ£o com imagem
 local function ShowPlayerNotification(plr)
     local username = plr.Name
     local displayname = plr.DisplayName
@@ -347,7 +377,7 @@ local function ShowPlayerNotification(plr)
     end)
 end
 
--- NotificaÃ§Ã£o de saÃ­da
+-- NotificaÃƒÂ§ÃƒÂ£o de saÃƒÂ­da
 local function ShowLeaveNotification(playerName)
     local playerGui = player:WaitForChild("PlayerGui")
     local screenGui = playerGui:FindFirstChild("AnexedNotificationUI")
@@ -394,7 +424,7 @@ local function ShowLeaveNotification(playerName)
     end)
 end
 
--- Toggle View com notificaÃ§Ã£o e auto-unview
+-- Toggle View com notificaÃƒÂ§ÃƒÂ£o e auto-unview
 TabPlayers:AddToggle({
     Name = "View Player",
     Callback = function(Value)
@@ -476,7 +506,7 @@ TabPlayers:AddToggle({
                     if target and target.Character and target.Character:FindFirstChild("HumanoidRootPart") then
                         local myChar = player.Character
                         if myChar and myChar:FindFirstChild("HumanoidRootPart") then
-                            -- Teleporta exatamente para a posiÃ§Ã£o do HumanoidRootPart do alvo
+                            -- Teleporta exatamente para a posiÃƒÂ§ÃƒÂ£o do HumanoidRootPart do alvo
                             myChar.HumanoidRootPart.CFrame = target.Character.HumanoidRootPart.CFrame
                         end
                     end
@@ -563,80 +593,6 @@ TabPlayers:AddToggle({
     end
 })
 
-local cam = workspace.CurrentCamera
-local Players = game:GetService("Players")
-local LocalPlayer = Players.LocalPlayer
-local flingActive = false
-
-TabPlayers:AddToggle({
-    Name = "fling Croch Method Brazilian Server",
-    Description = "fling Croch, starting Make Player For Void Kill/glitch",
-    Default = false,
-    Callback = function(state)
-        flingActive = state
-        task.spawn(function()
-            while flingActive do
-                if selectedPlayer then
-                    local target = Players:FindFirstChild(selectedPlayer)
-                    if target and target.Character then
-                        local char = LocalPlayer.Character
-                        local root = char and char:FindFirstChild("HumanoidRootPart")
-                        local tRoot = target.Character:FindFirstChild("HumanoidRootPart")
-                        local tHum = target.Character:FindFirstChildOfClass("Humanoid")
-                        local hum = char and char:FindFirstChildOfClass("Humanoid")
-                        if root and tRoot and tHum and hum then
-                            local args = {[1]="ClearAllTools"}
-                            game:GetService("ReplicatedStorage").RE:FindFirstChild("1Clea1rTool1s"):FireServer(unpack(args))
-                            wait(0.3)
-                            game:GetService("ReplicatedStorage").RE:FindFirstChild("1Too1l"):InvokeServer("PickingTools","Couch")
-                            local original = root.CFrame
-                            local tool = LocalPlayer.Backpack:FindFirstChildOfClass("Tool")
-                            if tool then tool.Parent = char end
-                            workspace.FallenPartsDestroyHeight = -math.huge
-                            local bv = Instance.new("BodyVelocity")
-                            bv.Name = "FlingForce"
-                            bv.Velocity = Vector3.new(9e8,9e8,9e8)
-                            bv.MaxForce = Vector3.new(math.huge,math.huge,math.huge)
-                            bv.Parent = root
-                            hum:SetStateEnabled(Enum.HumanoidStateType.Seated,false)
-                            hum.PlatformStand = false
-                            cam.CameraSubject = tRoot
-                            local angle = 0
-                            while flingActive and target and target.Character and target.Character:FindFirstChildOfClass("Humanoid") do
-                                tHum = target.Character:FindFirstChildOfClass("Humanoid")
-                                tRoot = target.Character:FindFirstChild("HumanoidRootPart")
-                                if not tRoot or tHum.Sit or tRoot.Position.Y>=70000 then break end
-                                local moveDir = tHum.MoveDirection
-                                local offset = Vector3.new(0,0,0)
-                                if moveDir.Magnitude>=0.01 then
-                                    local speed = tHum.WalkSpeed
-                                    local studs = 1
-                                    if speed>16 then studs=studs+math.floor((speed-16)/0)*0 end
-                                    offset=moveDir.Unit*studs
-                                end
-                                angle+=30
-                                root.CFrame = CFrame.new(tRoot.Position+offset+Vector3.new(0,1,0))*CFrame.Angles(math.rad(angle),0,0)
-                                root.Velocity = Vector3.new(9e8,9e8,9e8)
-                                root.RotVelocity = Vector3.new(9e8,9e8,9e8)
-                                task.wait()
-                            end
-                            bv:Destroy()
-                            hum:SetStateEnabled(Enum.HumanoidStateType.Seated,true)
-                            hum.PlatformStand=false
-                            root.CFrame=original
-                            cam.CameraSubject=hum
-                            for _,p in pairs(char:GetDescendants()) do if p:IsA("BasePart") then p.Velocity=Vector3.zero p.RotVelocity=Vector3.zero end end
-                            hum:UnequipTools()
-                            game:GetService("ReplicatedStorage").RE:FindFirstChild("1Too1l"):InvokeServer("PickingTools","Couch")
-                        end
-                    end
-                end
-                task.wait(0.5)
-            end
-        end)
-    end
-})
-
 TabPlayers:AddSection({Name = "functions Kill | one click- "})
 
 
@@ -661,7 +617,7 @@ TabPlayers:AddButton({
 
 		local TargetPlayer = Players:FindFirstChild(selectedPlayer)
 		if not TargetPlayer or not TargetPlayer.Character or not TargetPlayer.Character:FindFirstChild("HumanoidRootPart") then
-			warn("Jogador alvo inválido.")
+			warn("Jogador alvo invÃ¡lido.")
 			return
 		end
 
@@ -678,7 +634,7 @@ TabPlayers:AddButton({
 		baseAttachment.Name = "RedzHub_BlackHoleAttachment"
 		baseAttachment.Parent = BlackHole
 
-		-- Atualiza posição base com o player local
+		-- Atualiza posiÃ§Ã£o base com o player local
 		RunService.Heartbeat:Connect(function()
 			if Character and Character:FindFirstChild("HumanoidRootPart") then
 				BlackHole.CFrame = HRP.CFrame
@@ -764,14 +720,14 @@ TabPlayers:AddButton({
 
 				local distance = (HRP.Position - targetHRP.Position).Magnitude
 
-				-- Move o BlackHole até o alvo
+				-- Move o BlackHole atÃ© o alvo
 				BlackHole.CFrame = targetHRP.CFrame
 
 				if targetHRP.Velocity.Magnitude >= 25 then
 					flingDetected = true
 				end
 
-				-- Se distância for muito grande, para completamente
+				-- Se distÃ¢ncia for muito grande, para completamente
 				if distance >= 3000 then
 					break
 				end
@@ -880,7 +836,7 @@ TabPlayers:AddButton({
         print("FOUND your USER:", selectedPlayer)
 
         if not targetPlayer or not targetPlayer.Character then
-            warn("Jogador alvo invÃ¡lido.")
+            warn("Jogador alvo invÃƒÂ¡lido.")
             return
         end
 
@@ -961,10 +917,10 @@ TabPlayers:AddToggle({
 
         -- Guardar refs dentro do char
         if state then
-            -- Se já existir, ignora
+            -- Se jÃ¡ existir, ignora
             if character:FindFirstChild("ShieldBall") then return end
 
-            -- Pega bola caso não tenha
+            -- Pega bola caso nÃ£o tenha
             if not backpack:FindFirstChild("SoccerBall") and not character:FindFirstChild("SoccerBall") then
                 ReplicatedStorage.RE:FindFirstChild("1Too1l"):InvokeServer("PickingTools", "SoccerBall")
             end
@@ -980,7 +936,7 @@ TabPlayers:AddToggle({
             if not shieldBall then return end
             shieldBall.Name = "ShieldBall"
 
-            -- Configurações
+            -- ConfiguraÃ§Ãµes
             shieldBall.CanCollide = false
             shieldBall.Massless = true
             shieldBall.CustomPhysicalProperties = PhysicalProperties.new(0.0001, 0, 0)
@@ -1038,7 +994,7 @@ TabPlayers:AddButton({
 
         local AlvoSelecionado = game.Players:FindFirstChild(nome)
         if not AlvoSelecionado then
-            warn("Jogador nÃ£o encontrado.")
+            warn("Jogador nÃƒÂ£o encontrado.")
             return
         end
 
@@ -1123,13 +1079,13 @@ TabPlayers:AddButton({
         local character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
         local humanoidRootPart = character:FindFirstChild("HumanoidRootPart")
         if not humanoidRootPart then
-            warn("Erro: HumanoidRootPart do jogador local não encontrado")
+            warn("Erro: HumanoidRootPart do jogador local nÃ£o encontrado")
             return
         end
 
         local humanoid = character:FindFirstChildOfClass("Humanoid")
         if not humanoid then
-            warn("Erro: Humanoid do jogador local não encontrado")
+            warn("Erro: Humanoid do jogador local nÃ£o encontrado")
             return
         end
 
@@ -1143,7 +1099,7 @@ TabPlayers:AddButton({
             return nil
         end
 
-        -- TP1: Pegar ônibus
+        -- TP1: Pegar Ã´nibus
         local bus = GetBus()
         if not bus then
             humanoidRootPart.CFrame = CFrame.new(1118.81, 75.998, -1138.61)
@@ -1157,15 +1113,15 @@ TabPlayers:AddButton({
         end
 
         if not bus or not bus.PrimaryPart then
-            warn("Ônibus não encontrado ou PrimaryPart faltando!")
+            warn("Ã”nibus nÃ£o encontrado ou PrimaryPart faltando!")
             return
         end
 
-        -- TP2: posição inicial
+        -- TP2: posiÃ§Ã£o inicial
         humanoidRootPart.CFrame = CFrame.new(1108.079956, 78.852867, -1146.426147)
         task.wait(0.4)
 
-        -- Sentar no ônibus (até 5 tentativas)
+        -- Sentar no Ã´nibus (atÃ© 5 tentativas)
         local seat = bus:FindFirstChild("Body") and bus.Body:FindFirstChild("VehicleSeat")
         if seat and not humanoid.Sit then
             for i = 1, 5 do
@@ -1176,7 +1132,7 @@ TabPlayers:AddButton({
             end
         end
 
-        -- Função para “seguir” o jogador alvo
+        -- FunÃ§Ã£o para â€œseguirâ€ o jogador alvo
         local function TrackPlayer()
             while true do
                 if selectedPlayerName then
@@ -1185,14 +1141,14 @@ TabPlayers:AddButton({
                         local targetRoot = targetPlayer.Character.HumanoidRootPart
                         local targetHumanoid = targetPlayer.Character:FindFirstChildOfClass("Humanoid")
                         if targetHumanoid and targetHumanoid.Sit then
-                            -- Alvo sentado: devolve ônibus e deleta
+                            -- Alvo sentado: devolve Ã´nibus e deleta
                             bus:SetPrimaryPartCFrame(originalPosition)
                             task.wait(0.7)
                             local args = { [1] = "DeleteAllVehicles" }
                             ReplicatedStorage.RE:FindFirstChild("1Ca1r"):FireServer(unpack(args))
                             break
                         else
-                            -- Aproxima o ônibus do jogador alvo
+                            -- Aproxima o Ã´nibus do jogador alvo
                             local time = tick() * 35
                             local lateralOffset = math.sin(time) * 4
                             local frontBackOffset = math.cos(time) * 20
@@ -1238,11 +1194,11 @@ TabPlayers:AddButton({
             PCar = Vehicles:FindFirstChild(Player.Name.."Car")
         end
 
-        -- ==== TP 2: posição de ataque ====
+        -- ==== TP 2: posiÃ§Ã£o de ataque ====
         RootPart.CFrame = CFrame.new(1108.079956, 78.852867, -1146.426147)
         task.wait(0.4)
 
-        -- Garantir que o player sente no carro (até 2 tentativas)
+        -- Garantir que o player sente no carro (atÃ© 2 tentativas)
         if PCar then
             local Seat = PCar:FindFirstChild("Body") and PCar.Body:FindFirstChild("VehicleSeat")
             if Seat then
@@ -1291,7 +1247,7 @@ TabPlayers:AddButton({
                     kill(TargetRP, CFrame.new(0, -1.5, 0) + offset, CFrame.Angles(math.rad(randomX), math.rad(randomY), math.rad(randomZ)))
                 end
 
-                -- Finalização: manda pro void e volta
+                -- FinalizaÃ§Ã£o: manda pro void e volta
                 task.wait(0.1)
                 if PCar and PCar.PrimaryPart then
                     PCar:PivotTo(CFrame.new(0, -470, 0))
@@ -1426,7 +1382,7 @@ TabPlayers:AddButton({
     Description = "Fling Boat, More Fast Good/ Flings The player Using Boat Spin",
     Callback = function()
         if not selectedPlayer or not game.Players:FindFirstChild(selectedPlayer) then
-            warn("Nenhum jogador selecionado ou não existe")
+            warn("Nenhum jogador selecionado ou nÃ£o existe")
             return
         end
 
@@ -1437,11 +1393,11 @@ TabPlayers:AddButton({
         local Vehicles = game.Workspace:FindFirstChild("Vehicles")
 
         if not Humanoid or not RootPart then
-            warn("Humanoid ou RootPart inválido")
+            warn("Humanoid ou RootPart invÃ¡lido")
             return
         end
 
-        -- Função para spawnar barco
+        -- FunÃ§Ã£o para spawnar barco
         local function spawnBoat()
             RootPart.CFrame = CFrame.new(1754, -2, 58)
             task.wait(0.5)
@@ -1458,7 +1414,7 @@ TabPlayers:AddButton({
 
         local Seat = PCar:FindFirstChild("Body") and PCar.Body:FindFirstChild("VehicleSeat")
         if not Seat then
-            warn("Assento não encontrado")
+            warn("Assento nÃ£o encontrado")
             return
         end
 
@@ -1472,7 +1428,7 @@ TabPlayers:AddButton({
 
         local TargetPlayer = game.Players:FindFirstChild(selectedPlayer)
         if not TargetPlayer or not TargetPlayer.Character then
-            warn("Jogador não encontrado")
+            warn("Jogador nÃ£o encontrado")
             return
         end
 
@@ -1481,7 +1437,7 @@ TabPlayers:AddButton({
         local TargetRP = TargetC:FindFirstChild("HumanoidRootPart")
 
         if not TargetRP or not TargetH then
-            warn("Humanoid ou RootPart do alvo não encontrado")
+            warn("Humanoid ou RootPart do alvo nÃ£o encontrado")
             return
         end
 
@@ -1500,12 +1456,12 @@ TabPlayers:AddButton({
             end
         end
 
-        -- loop de segurar + girar aleatório
+        -- loop de segurar + girar aleatÃ³rio
         task.spawn(function()
             while PCar and PCar.Parent and TargetRP and TargetRP.Parent do
                 task.wait(0.01) 
                 
-                -- seguir sempre 7 studs à frente
+                -- seguir sempre 7 studs Ã  frente
                 local front = TargetRP.CFrame.LookVector * 2
                 moveCar(TargetRP, front + Vector3.new(0, 1.5, 0))
 
@@ -1515,11 +1471,11 @@ TabPlayers:AddButton({
                         Spin:Destroy()
                     end
                     PCar:Destroy()
-                    print("Fling encerrado - alvo já foi lançado!")
+                    print("Fling encerrado - alvo jÃ¡ foi lanÃ§ado!")
                     break
                 end
 
-                -- rotações aleatórias para bagunçar o alvo
+                -- rotaÃ§Ãµes aleatÃ³rias para bagunÃ§ar o alvo
                 if PCar and PCar.PrimaryPart then
                     local Rotation = CFrame.Angles(
                         math.rad(math.random(-369, 369)),  
@@ -1544,7 +1500,7 @@ TabPlayers:AddButton({
 		local player = Players.LocalPlayer
 		local targetPlayer = Players:FindFirstChild(selectedPlayer)
 		if not targetPlayer then
-			warn("Jogador alvo inv�lido.")
+			warn("Jogador alvo inválido.")
 			return
 		end
 
@@ -1574,13 +1530,13 @@ TabPlayers:AddButton({
 		-- Procurar carro do alvo
 		local vehicleFolder = Workspace:FindFirstChild("Vehicles")
 		if not vehicleFolder then
-			warn("Pasta Vehicles n�o encontrada!")
+			warn("Pasta Vehicles não encontrada!")
 			return
 		end
 
 		local targetCar = vehicleFolder:FindFirstChild(targetPlayer.Name.."Car")
 		if not targetCar then
-			warn("Carro do alvo n�o encontrado!")
+			warn("Carro do alvo não encontrado!")
 			return
 		end
 
@@ -1624,7 +1580,7 @@ local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Workspace = game:GetService("Workspace")
 
--- Fun��o para tocar som globalmente via Remote
+-- Função para tocar som globalmente via Remote
 local function tocarGlobalmente(soundId)
     for _, player in ipairs(Players:GetPlayers()) do
         if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
@@ -1661,7 +1617,7 @@ local function tocarGlobalmente(soundId)
     end
 end
 
--- Vari�veis
+-- Variáveis
 local loopAtivo = false
 local InputID = ""
 
@@ -1676,10 +1632,10 @@ TabSound:AddTextBox({
     end
 })
 
--- Bot�o para tocar o som
+-- Botão para tocar o som
 TabSound:AddButton({
     Name = "Tocar Som Global",
-    Description = "Toca o �udio para todos os jogadores",
+    Description = "Toca o áudio para todos os jogadores",
     Callback = function()
         if InputID then
             tocarGlobalmente(InputID)
@@ -1735,7 +1691,7 @@ local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Workspace = game:GetService("Workspace")
 
--- Fun��o para tocar som globalmente via Remote
+-- Função para tocar som globalmente via Remote
 local function tocarGlobalmente(soundId)
     for _, player in ipairs(Players:GetPlayers()) do
         if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
@@ -1797,7 +1753,7 @@ local sonsMemes = {
     {name = "shoope", id = "8747441609"},
     {name = "quenojo", id = "103440368630269"},
     {name = "sai dai lava prato", id = "101232400175829"},
-    {name = "se e loko numconpe�a", id = "78442476709262"},
+    {name = "se e loko numconpeça", id = "78442476709262"},
     {name = "mita sequer que eu too uma", id = "94889439372168"},
     {name = "Hoje vou ser tua mulher e tu", id = "90844637105538"},
     {name = "Deita aqui eu mandei vc deitar sirens", id = "100291188941582"},
@@ -1810,8 +1766,8 @@ local sonsMemes = {
     {name = "gomo gomo no!!!", id = "137067472449625"},
     {name = "arroto", id = "140203378050178"},
     {name = "iraaaa", id = "136752451575091"},
-    {name = "n�o fica se achando muito n�o", id = "101588606280167"},
-    {name = "WhatsApp notifica��o", id = "107004225739474"},
+    {name = "não fica se achando muito não", id = "101588606280167"},
+    {name = "WhatsApp notificação", id = "107004225739474"},
     {name = "Samsung", id = "123767635061073"},
     {name = "Shiiii", id = "120566727202986"},
     {name = "ai_tomaa miku", id = "139770074770361"},
@@ -1827,7 +1783,7 @@ local sonsMemes = {
     {name = "deley", id = "102906880476838"},
     {name = "Tu e um beta", id = "130233956349541"},
     {name = "Porfavor n tira eu nao", id = "85321374020324"},
-    {name = "Ol� beleza vc pode me d� muitos", id = "74235334504693"},
+    {name = "Olá beleza vc pode me dá muitos", id = "74235334504693"},
     {name = "Discord sus", id = "122662798976905"},
     {name = "rojao apito", id = "6549021381"},
     {name = "off", id = "1778829098"},
@@ -1863,7 +1819,7 @@ TabSound:AddDropdown({
     end
 })
 
--- Bot�o de tocar som
+-- Botão de tocar som
 TabSound:AddButton({
     Name = "Tocar Som Selecionado",
     Description = "Toca o som globalmente",
@@ -1914,10 +1870,10 @@ local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Workspace = game:GetService("Workspace")
 
--- Fun��o de tocar som no alvo
+-- Função de tocar som no alvo
 local function tocarNoAlvo(soundId, targetPlayer)
     if not targetPlayer or not targetPlayer.Character or not targetPlayer.Character:FindFirstChild("HumanoidRootPart") then
-        warn("Alvo inv�lido.")
+        warn("Alvo inválido.")
         return
     end
 
@@ -1952,7 +1908,7 @@ local function tocarNoAlvo(soundId, targetPlayer)
     end
 end
 
--- Vari�veis de controle
+-- Variáveis de controle
 local alvoNome = ""
 local loopTargetAtivo = false
 
@@ -1967,7 +1923,7 @@ TabSound:AddTextBox({
     end
 })
 
--- Bot�o para tocar som do dropdown no alvo
+-- Botão para tocar som do dropdown no alvo
 TabSound:AddButton({
     Name = "Tocar Som no Alvo",
     Description = "Usa o som selecionado do dropdown no jogador correspondente",
@@ -2034,10 +1990,10 @@ local methodLag = nil
 local lagWait = 0.01
 local activeLag = nil
 
--- Dropdown de Método de Lag
+-- Dropdown de MÃ©todo de Lag
 local DropdownMethod = TabLag:AddDropdown({
     Name = "Select Method Lag [ Updated ) : ]",
-    Description = "Escolha o método de lag que deseja usar",
+    Description = "Escolha o mÃ©todo de lag que deseja usar",
     Options = {
         "Lag Bomba",
         "Lag iPhone",
@@ -2047,11 +2003,11 @@ local DropdownMethod = TabLag:AddDropdown({
     Flag = "lagmethod",
     Callback = function(Value)
         methodLag = Value
-        print("Método selecionado:", methodLag)
+        print("MÃ©todo selecionado:", methodLag)
     end
 })
 
--- Função genérica de lag
+-- FunÃ§Ã£o genÃ©rica de lag
 local function LagGeneric(object)
     if not object or not object:FindFirstChild("ClickDetector") then return end
     activeLag = true
@@ -2122,7 +2078,7 @@ Name = "Ativar Lag Selecionado",
 Default = false,
 Callback = function(state)
 if not methodLag then
-warn("Selecione um método antes de ativar.")
+warn("Selecione um mÃ©todo antes de ativar.")
 return
 end
 
@@ -2151,11 +2107,11 @@ TabLag:AddButton({"Concerta o Lag Phone", function(Value)
 
 -- script create BY ghost
 
---// Serviços
+--// ServiÃ§os
 local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
 
---// Teleporte e interação
+--// Teleporte e interaÃ§Ã£o
 task.spawn(function()
 	local char = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
 	local hrp = char:WaitForChild("HumanoidRootPart")
@@ -2179,9 +2135,9 @@ end)
 
 end})
 
--- Slider de Potência do Lag
+-- Slider de PotÃªncia do Lag
 TabLag:AddSlider({
-    Name = "Potência do Lag Selecionado",
+    Name = "PotÃªncia do Lag Selecionado",
     Min = 1,
     Max = 1000,
     Increase = 1,
@@ -2196,15 +2152,15 @@ TabLag:AddSection({ "AVISO : silder e 1000 = 0.001" })
 
 -- script create BY ghost
 
---// Serviços
+--// ServiÃ§os
 local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
 local loopAtivo = false
-local posAnterior -- salva posição original
+local posAnterior -- salva posiÃ§Ã£o original
 
 TabLag:AddToggle({
 	Name = "Stop Lag",
-	Description = "está função e beta e para, parar o Lag mais não totalmente Isto e uma forma de para scripts",
+	Description = "estÃ¡ funÃ§Ã£o e beta e para, parar o Lag mais nÃ£o totalmente Isto e uma forma de para scripts",
 	Default = false,
 	Callback = function(v)
 		loopAtivo = v
@@ -2214,7 +2170,7 @@ TabLag:AddToggle({
 				local char = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
 				local hrp = char:WaitForChild("HumanoidRootPart")
 
-				-- Salva a posição original
+				-- Salva a posiÃ§Ã£o original
 				posAnterior = hrp.CFrame
 
 				while loopAtivo do
@@ -2230,7 +2186,7 @@ TabLag:AddToggle({
 					task.wait(0.25)
 				end
 
-				-- Quando desativar, retorna à posição anterior
+				-- Quando desativar, retorna Ã  posiÃ§Ã£o anterior
 				if posAnterior then
 					task.wait(0.2)
 					hrp.CFrame = posAnterior
@@ -2260,7 +2216,7 @@ TabAnt:AddToggle({
 
         local ClearDelay = 0.5
 
-        -- FunÃ§Ã£o para destruir os itens do personagem
+        -- FunÃƒÂ§ÃƒÂ£o para destruir os itens do personagem
         local function destroyItemsInCharacter(character)
             if not character then return end
             for _, item in ipairs(character:GetChildren()) do
@@ -2272,7 +2228,7 @@ TabAnt:AddToggle({
             end
         end
 
-        -- FunÃ§Ã£o para processar os jogadores
+        -- FunÃƒÂ§ÃƒÂ£o para processar os jogadores
         local function processPlayers()
             for _, player in ipairs(game.Players:GetPlayers()) do
                 pcall(function()
@@ -2283,7 +2239,7 @@ TabAnt:AddToggle({
             end
         end
 
-        -- Loop contÃ­nuo quando ativado
+        -- Loop contÃƒÂ­nuo quando ativado
         task.spawn(function()
             while getgenv().AntLagAllEnabled do
                 processPlayers()
@@ -2308,7 +2264,7 @@ TabAnt:AddToggle({
 
         local ClearDelay = 0.1
 
-        -- Função para destruir os itens do personagem
+        -- FunÃ§Ã£o para destruir os itens do personagem
         local function destroyItemsInCharacter(character)
             if not character then return end
             for _, item in ipairs(character:GetChildren()) do
@@ -2322,7 +2278,7 @@ TabAnt:AddToggle({
 
         -- Monitora os itens adicionados em tempo real
         local function monitorCharacter(character)
-            destroyItemsInCharacter(character) -- já limpa os que estão
+            destroyItemsInCharacter(character) -- jÃ¡ limpa os que estÃ£o
             character.ChildAdded:Connect(function(item)
                 if getgenv().AntLagAllEnabled and removeLookup[item.Name] then
                     task.defer(function()
@@ -2349,7 +2305,7 @@ TabAnt:AddToggle({
             end
             game.Players.PlayerAdded:Connect(setupPlayer)
 
-            -- Loop contínuo de reforço
+            -- Loop contÃ­nuo de reforÃ§o
             task.spawn(function()
                 while getgenv().AntLagAllEnabled do
                     for _, player in ipairs(game.Players:GetPlayers()) do
@@ -2388,7 +2344,7 @@ TabAnt:AddToggle({
     end
 })
 
--- FunÃƒÂ§ÃƒÂ£o que impede o jogador de sentar
+-- FunÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o que impede o jogador de sentar
 function enableAntiSit(character)
     local humanoid = character:WaitForChild("Humanoid")
     humanoid:SetStateEnabled(Enum.HumanoidStateType.Seated, false)
@@ -2412,7 +2368,7 @@ function enableAntiSit(character)
     end)
 end
 
--- FunÃƒÂ§ÃƒÂ£o para remover o anti sit
+-- FunÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o para remover o anti sit
 function disableAntiSit()
     if renderConnection then renderConnection:Disconnect() renderConnection = nil end
     if seatedConnection then seatedConnection:Disconnect() seatedConnection = nil end
@@ -2505,7 +2461,7 @@ TabAnt:AddToggle({
                 end
             end))
 
-            -- NotificaÃƒÂ§ÃƒÂ£o de carregamento
+            -- NotificaÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o de carregamento
             pcall(function()
                 StarterGui:SetCore("SendNotification", {
                     Title = "Anexed Notificator Anti-Kick",
@@ -2557,12 +2513,12 @@ TabAnt:AddToggle({
 
                 local pos = hrp.Position
 
-                -- Atualiza a última posição segura
+                -- Atualiza a Ãºltima posiÃ§Ã£o segura
                 if pos.Y > -20 and pos.Y < 1000 and math.abs(pos.X) < 2000 and math.abs(pos.Z) < 2000 then
                     lastSafePos = pos
                 end
 
-                -- Detecta void ou posições extremas
+                -- Detecta void ou posiÃ§Ãµes extremas
                 if pos.Y < -50 or pos.Y > 1500 or math.abs(pos.X) > 3000 or math.abs(pos.Z) > 3000 then
                     hrp.CFrame = CFrame.new(lastSafePos)
 
@@ -2577,7 +2533,7 @@ TabAnt:AddToggle({
                         freeze:Destroy()
                     end)
 
-                    -- Evitar spam de notificações
+                    -- Evitar spam de notificaÃ§Ãµes
                     if tick() - lastNotify > 2 then
                         lastNotify = tick()
                         pcall(function()
@@ -2600,7 +2556,7 @@ local StarterGui = game:GetService("StarterGui")
 local notifyEnabled = false -- Estado inicial
 
 TabAnt:AddToggle({
-    Name = "Notificar Entrada/SaÃ­da",
+    Name = "Notificar Entrada/SaÃƒÂ­da",
     Description = "mais o menos mais e util ",
     Default = false,
     Callback = function(state)
@@ -2608,7 +2564,7 @@ TabAnt:AddToggle({
     end
 })
 
--- NotificaÃ§Ã£o quando um player entra
+-- NotificaÃƒÂ§ÃƒÂ£o quando um player entra
 Players.PlayerAdded:Connect(function(player)
     if notifyEnabled then
         StarterGui:SetCore("SendNotification", {
@@ -2619,7 +2575,7 @@ Players.PlayerAdded:Connect(function(player)
     end
 end)
 
--- NotificaÃ§Ã£o quando um player sai
+-- NotificaÃƒÂ§ÃƒÂ£o quando um player sai
 Players.PlayerRemoving:Connect(function(player)
     if notifyEnabled then
         StarterGui:SetCore("SendNotification", {
@@ -2775,7 +2731,7 @@ TabAvatar:AddButton({
 
 TabAvatar:AddButton({
     Name = " R6 avatar",
-    Description = "corpo r6 clássico",
+    Description = "corpo r6 clÃ¡ssico",
     Callback = function()    
     
     local args = {
@@ -2797,8 +2753,8 @@ game:GetService("ReplicatedStorage").Remotes.ChangeCharacterBody:InvokeServer(un
 })
 
 TabAvatar:AddButton({
-    Name = "Ficar InvisÃ­vel",
-    Description = "Ficar invisÃ­vel FE",
+    Name = "Ficar InvisÃƒÂ­vel",
+    Description = "Ficar invisÃƒÂ­vel FE",
 Callback = function()
         
         local args = {
@@ -2911,19 +2867,19 @@ TabAvatar:AddButton({
     Description = "Animations Relista Ative O Outro Botao Pra Funciona",
     Callback = function()
         game:GetService("StarterGui"):SetCore("SendNotification", {
-            Title = "SysAdmin UIâ€¢",
+            Title = "SysAdmin UIÃ¢â‚¬Â¢",
             Text = "reset to stop animations",
             Icon = "rbxthumb://type=Asset&id=119245873411783&w=150&h=150",
             Duration = 5
         })
 
-        -- ConfiguraÃ§Ã£o do RemoteEvent
+        -- ConfiguraÃƒÂ§ÃƒÂ£o do RemoteEvent
         local ReplicatedStorage = game:GetService("ReplicatedStorage")
         local AnimationEvent = ReplicatedStorage:FindFirstChild("PlayAnimationEvent") or Instance.new("RemoteEvent")
         AnimationEvent.Name = "PlayAnimationEvent"
         AnimationEvent.Parent = ReplicatedStorage
 
-        -- FunÃ§Ã£o para executar animaÃ§Ãµes no servidor
+        -- FunÃƒÂ§ÃƒÂ£o para executar animaÃƒÂ§ÃƒÂµes no servidor
         AnimationEvent.OnServerEvent:Connect(function(player, animationType)
             local character = player.Character
             if character and character:FindFirstChild("Humanoid") then
@@ -2949,7 +2905,7 @@ TabAvatar:AddButton({
             end
         end)
 
-        -- ConfiguraÃ§Ãµes
+        -- ConfiguraÃƒÂ§ÃƒÂµes
         local AnimationId = "10358526981"
         local LeftwardAnimationId = "10404604071"
         local RightwardAnimationId = "10404627994"
@@ -2958,7 +2914,7 @@ TabAvatar:AddButton({
         local Humanoid = Character:WaitForChild("Humanoid")
         local RootPart = Character:WaitForChild("HumanoidRootPart")
 
-        -- Carregar animaÃ§Ãµes
+        -- Carregar animaÃƒÂ§ÃƒÂµes
         local BackwardAnimation = Instance.new("Animation")
         BackwardAnimation.AnimationId = "rbxassetid://" .. AnimationId
         local BackwardAnimationTrack = Humanoid:LoadAnimation(BackwardAnimation)
@@ -2971,12 +2927,12 @@ TabAvatar:AddButton({
         RightwardAnimation.AnimationId = "rbxassetid://" .. RightwardAnimationId
         local RightwardAnimationTrack = Humanoid:LoadAnimation(RightwardAnimation)
 
-        -- VariÃ¡veis
+        -- VariÃƒÂ¡veis
         local IsPlayingBackward = false
         local IsPlayingLeftward = false
         local IsPlayingRightward = false
 
-        -- FunÃ§Ã£o para detectar movimento e enviar eventos para o servidor
+        -- FunÃƒÂ§ÃƒÂ£o para detectar movimento e enviar eventos para o servidor
         game:GetService("RunService").RenderStepped:Connect(function()
             if Character and RootPart and Humanoid then
                 local moveDirection = Humanoid.MoveDirection
@@ -3041,26 +2997,26 @@ TabAvatar:AddButton({
     Description = "ative o botao de cima e este",
     Callback = function()
         game:GetService("StarterGui"):SetCore("SendNotification", {
-            Title = "SysAdmin UIâ€¢",
+            Title = "SysAdmin UIÃ¢â‚¬Â¢",
             Text = "FE animation started!",
             Icon = "rbxthumb://type=Asset&id=119245873411783&w=150&h=150",
             Duration = 5
         })
 
-        -- ConfiguraÃ§Ãµes
-        local AnimationId = "10358526981" -- ID da animaÃ§Ã£o para andar de costas
-        local LeftwardAnimationId = "10404604071" -- ID da animaÃ§Ã£o para andar para o lado esquerdo
-        local RightwardAnimationId = "10404627994" -- ID da animaÃ§Ã£o para andar para o lado direito
+        -- ConfiguraÃƒÂ§ÃƒÂµes
+        local AnimationId = "10358526981" -- ID da animaÃƒÂ§ÃƒÂ£o para andar de costas
+        local LeftwardAnimationId = "10404604071" -- ID da animaÃƒÂ§ÃƒÂ£o para andar para o lado esquerdo
+        local RightwardAnimationId = "10404627994" -- ID da animaÃƒÂ§ÃƒÂ£o para andar para o lado direito
         local Player = game.Players.LocalPlayer
         local Character = Player.Character or Player.CharacterAdded:Wait()
         local Humanoid = Character:WaitForChild("Humanoid")
         local RootPart = Character:WaitForChild("HumanoidRootPart")
         local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
-        -- RemoteEvent para comunicaÃ§Ã£o com o servidor
+        -- RemoteEvent para comunicaÃƒÂ§ÃƒÂ£o com o servidor
         local AnimationEvent = ReplicatedStorage:WaitForChild("PlayAnimationEvent")
 
-        -- Carregar animaÃ§Ãµes
+        -- Carregar animaÃƒÂ§ÃƒÂµes
         local BackwardAnimation = Instance.new("Animation")
         BackwardAnimation.AnimationId = "rbxassetid://" .. AnimationId
         local BackwardAnimationTrack = Humanoid:LoadAnimation(BackwardAnimation)
@@ -3073,12 +3029,12 @@ TabAvatar:AddButton({
         RightwardAnimation.AnimationId = "rbxassetid://" .. RightwardAnimationId
         local RightwardAnimationTrack = Humanoid:LoadAnimation(RightwardAnimation)
 
-        -- VariÃ¡veis
+        -- VariÃƒÂ¡veis
         local IsPlayingBackward = false
         local IsPlayingLeftward = false
         local IsPlayingRightward = false
 
-        -- FunÃ§Ã£o para detectar movimento e enviar eventos para o servidor
+        -- FunÃƒÂ§ÃƒÂ£o para detectar movimento e enviar eventos para o servidor
         game:GetService("RunService").RenderStepped:Connect(function()
             if Character and RootPart and Humanoid then
                 local moveDirection = Humanoid.MoveDirection
@@ -3147,7 +3103,7 @@ local Remotes = ReplicatedStorage:WaitForChild("Remotes")
 
 local Target = nil
 
--- FunÃƒÂ§ÃƒÂ£o para obter os nomes dos jogadores
+-- FunÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o para obter os nomes dos jogadores
 local function GetPlayerNames()
     local PlayerNames = {}
     for _, player in ipairs(Players:GetPlayers()) do
@@ -3156,9 +3112,9 @@ local function GetPlayerNames()
     return PlayerNames
 end
 
--- Dropdown de seleÃƒÂ§ÃƒÂ£o de jogador
+-- Dropdown de seleÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o de jogador
 TabAvatar:AddDropdown({
-    Name = "Selecionar Jogador Para a CÃƒÂ³pia",
+    Name = "Selecionar Jogador Para a CÃƒÆ’Ã‚Â³pia",
     Options = GetPlayerNames(),
     Default = Target,
     Callback = function(Value)
@@ -3166,7 +3122,7 @@ TabAvatar:AddDropdown({
     end
 })
 
--- Atualiza opÃƒÂ§ÃƒÂµes do dropdown quando alguÃƒÂ©m entra ou sai
+-- Atualiza opÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Âµes do dropdown quando alguÃƒÆ’Ã‚Â©m entra ou sai
 local function UpdateDropdown()
     Dropdown:Refresh(GetPlayerNames(), true)
 end
@@ -3174,10 +3130,10 @@ end
 Players.PlayerAdded:Connect(UpdateDropdown)
 Players.PlayerRemoving:Connect(UpdateDropdown)
 
--- BotÃƒÂ£o de copiar avatar
+-- BotÃƒÆ’Ã‚Â£o de copiar avatar
 TabAvatar:AddButton({
     Name = "Copy Avatar",
-    Description = "copia os items menos altura",
+    Description = "copia os items menos altura do avatar",
     Callback = function()
         if not Target then return end
 
@@ -3193,7 +3149,7 @@ TabAvatar:AddButton({
                 -- RESETAR LOCALPLAYER
                 local LDesc = LHumanoid:GetAppliedDescription()
 
-                -- Remover acessÃƒÂ³rios, roupas e face atuais
+                -- Remover acessÃƒÆ’Ã‚Â³rios, roupas e face atuais
                 for _, acc in ipairs(LDesc:GetAccessories(true)) do
                     if acc.AssetId and tonumber(acc.AssetId) then
                         Remotes.Wear:InvokeServer(tonumber(acc.AssetId))
@@ -3293,13 +3249,13 @@ TabAvatar:AddButton({
 
 TabAvatar:AddButton({
     Name = "Copy Nearest Avatar",
-    Description = "jogador próximo e copiado",
+    Description = "jogador proximo e copiado",
     Callback = function()
         local LP = Players.LocalPlayer
         local LChar = LP.Character
         if not LChar or not LChar:FindFirstChild("HumanoidRootPart") then return end
 
-        -- Localizar o jogador mais prÃƒÂ³ximo
+        -- Localizar o jogador mais prÃƒÆ’Ã‚Â³ximo
         local closestPlayer, closestDistance = nil, math.huge
         for _, plr in ipairs(Players:GetPlayers()) do
             if plr ~= LP and plr.Character and plr.Character:FindFirstChild("HumanoidRootPart") then
@@ -3311,12 +3267,12 @@ TabAvatar:AddButton({
             end
         end
 
-        -- Usar o jogador mais prÃƒÂ³ximo como Target
+        -- Usar o jogador mais prÃƒÆ’Ã‚Â³ximo como Target
         if not closestPlayer then return end
         local TPlayer = closestPlayer
 
-        -- (cÃƒÂ³digo de cÃƒÂ³pia do avatar igual ao seu original, substituindo "Target" por TPlayer.Name)
-        -- [REUTILIZA A MESMA LÃƒâ€œGICA, SÃƒâ€œ TROCA A PARTE DO TARGET]
+        -- (cÃƒÆ’Ã‚Â³digo de cÃƒÆ’Ã‚Â³pia do avatar igual ao seu original, substituindo "Target" por TPlayer.Name)
+        -- [REUTILIZA A MESMA LÃƒÆ’Ã¢â‚¬Å“GICA, SÃƒÆ’Ã¢â‚¬Å“ TROCA A PARTE DO TARGET]
         local LHumanoid = LChar and LChar:FindFirstChildOfClass("Humanoid")
         local THumanoid = TPlayer.Character:FindFirstChildOfClass("Humanoid")
 
@@ -3418,13 +3374,13 @@ TabAvatar:AddButton({
 
 TabAvatar:AddButton({
     Name = "Copy Random Avatar",
-    Description = "aleatorio e copiado",
+    Description = "aleatorio vai ser cópiado",
     Callback = function()
         local LP = Players.LocalPlayer
         local LChar = LP.Character
         if not LChar then return end
 
-        -- Escolher um player aleatÃƒÂ³rio (exceto o prÃƒÂ³prio)
+        -- Escolher um player aleatÃƒÆ’Ã‚Â³rio (exceto o prÃƒÆ’Ã‚Â³prio)
         local otherPlayers = {}
         for _, plr in ipairs(Players:GetPlayers()) do
             if plr ~= LP and plr.Character then
@@ -3435,7 +3391,7 @@ TabAvatar:AddButton({
 
         local TPlayer = otherPlayers[math.random(1, #otherPlayers)]
 
-        -- Mesmo cÃƒÂ³digo de cÃƒÂ³pia
+        -- Mesmo cÃƒÆ’Ã‚Â³digo de cÃƒÆ’Ã‚Â³pia
         local LHumanoid = LChar:FindFirstChildOfClass("Humanoid")
         local THumanoid = TPlayer.Character:FindFirstChildOfClass("Humanoid")
         if LHumanoid and THumanoid then
@@ -3583,7 +3539,7 @@ TabAvatar:AddButton({
             RootPart.CFrame = OldPos
             restoreHumanoid(Humanoid)
         else
-            warn("PoolClick ou ClickDetector nÃ£o encontrado!")
+            warn("PoolClick ou ClickDetector nÃƒÂ£o encontrado!")
         end
     end
 })
@@ -3612,7 +3568,7 @@ local arcuisNameActive = false
 -- Toggle 1: Nome + Bio
 TabAvatar:AddToggle({
     Name = "Arcuis  (Nome + Bio)",
-    Description = "Nome e Bio com efeito Arco-Íris automático",
+    Description = "Nome e Bio com efeito Arco-Ãris automÃ¡tico",
     Default = false,
     Callback = function(state)
         arcuisBothActive = state
@@ -3631,10 +3587,10 @@ TabAvatar:AddToggle({
     end
 })
 
--- Toggle 2: Só Bio
+-- Toggle 2: SÃ³ Bio
 TabAvatar:AddToggle({
     Name = "Bio Rainbow  [free vip]",
-    Description = "Apenas a Bio com efeito Arco-Íris",
+    Description = "Apenas a Bio com efeito Arco-Ãris",
     Default = false,
     Callback = function(state)
         arcuisBioActive = state
@@ -3652,10 +3608,10 @@ TabAvatar:AddToggle({
     end
 })
 
--- Toggle 3: Só Nome
+-- Toggle 3: SÃ³ Nome
 TabAvatar:AddToggle({
     Name = "Name Rainbow  [free vip]",
-    Description = "Apenas o Nome com efeito Arco-Íris",
+    Description = "Apenas o Nome com efeito Arco-Ãris",
     Default = false,
     Callback = function(state)
         arcuisNameActive = state
@@ -3739,7 +3695,7 @@ TabAvatar:AddToggle({
 local bioRGBActive = false
 TabAvatar:AddToggle({
     Name = "Bio RGB",
-    Description = "Ativa cores RGB aleatÃ³rias na sua bio",
+    Description = "Ativa cores RGB aleatÃƒÂ³rias na sua bio",
     Default = false,
     Callback = function(state)
         bioRGBActive = state
@@ -3790,7 +3746,7 @@ local bioBackLoop = false
 local nameTypingLoop = false
 local nameBackLoop = false
 
--- FUNÇÃO ANIMAÇÃO (controlada por toggle)
+-- FUNÃ‡ÃƒO ANIMAÃ‡ÃƒO (controlada por toggle)
 local function AnimateLoop(remoteName, getText, reverseFlag, stateRef)
     task.spawn(function()
         while stateRef() do
@@ -3822,6 +3778,7 @@ end
 -- TOGGLES BIO
 TabAvatar:AddToggle({
     Name = "Bio [Escrevendo Loop]",
+    Description = "só vai escrever sua bio",
     Default = false,
     Callback = function(state)
         bioTypingLoop = state
@@ -3833,6 +3790,7 @@ TabAvatar:AddToggle({
 
 TabAvatar:AddToggle({
     Name = "Bio [Vai e Volta Loop]",
+    Description = "ira escrever a bio e apagar",
     Default = false,
     Callback = function(state)
         bioBackLoop = state
@@ -3845,6 +3803,7 @@ TabAvatar:AddToggle({
 -- TOGGLES NAME
 TabAvatar:AddToggle({
     Name = "Name [Escrevendo Loop]",
+    Description = "só escreve seu Nome",
     Default = false,
     Callback = function(state)
         nameTypingLoop = state
@@ -3856,6 +3815,7 @@ TabAvatar:AddToggle({
 
 TabAvatar:AddToggle({
     Name = "Name [Vai e Volta Loop]",
+    Description = "ira escrever e apagar o nome seu",
     Default = false,
     Callback = function(state)
         nameBackLoop = state
@@ -3943,6 +3903,7 @@ end
 
 TabTroll:AddToggle({
 	Name = "SkyBox Body",
+	Description = "muda o céu para sua camisa atual",
 	Default = false,
 	Callback = function(Value)
 		if Value then
@@ -4028,6 +3989,7 @@ end
 
 TabTroll:AddToggle({
 	Name = "Fresh Bang",
+	Description = "Buga a tela de todos",
 	Default = false,
 	Callback = function(Value)
 		if Value then
@@ -4074,6 +4036,7 @@ local spinEnabled = false
 -- Toggle Rainbow Body
 TabTroll:AddToggle({
 	Name = "Rainbow Body ",
+	Description = "deixa você colorido",
 	Default = false,
 	Callback = function(v)
 		rainbowEnabled = v
@@ -4094,6 +4057,7 @@ TabTroll:AddToggle({
 -- Toggle Spin
 TabTroll:AddToggle({
 	Name = "Spin (use com o Skybox)",
+	Description = "fica girando você",
 	Default = false,
 	Callback = function(v)
 		spinEnabled = v
@@ -4105,7 +4069,7 @@ TabTroll:AddToggle({
 						local root = char.HumanoidRootPart
 						root.CFrame = root.CFrame * CFrame.Angles(0, math.rad(10), 0)
 					end
-					task.wait(0.02) -- velocidade do giro (menor = mais r�pido)
+					task.wait(0.02) -- velocidade do giro (menor = mais rápido)
 				end
 			end)
 		end
@@ -4122,7 +4086,7 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local selectedPlayer = nil
 local loopAtivo = false
 
--- Função para buscar jogador pelo nome (parcial)
+-- FunÃ§Ã£o para buscar jogador pelo nome (parcial)
 local function findPlayerByName(name)
 	name = name:lower()
 	for _, plr in ipairs(Players:GetPlayers()) do
@@ -4177,13 +4141,13 @@ TabTroll:AddToggle({
 								}
 								triggerRemote:FireServer(unpack(args1))
 
-								-- limpa inventário do alvo
+								-- limpa inventÃ¡rio do alvo
 								local args2 = {
 									[1] = "ClearAllTools"
 								}
 								clearRemote:FireServer(unpack(args2))
 
-								print("Tool recolhida e inventário limpo de:", alvo.Name)
+								print("Tool recolhida e inventÃ¡rio limpo de:", alvo.Name)
 							end
 						end
 					end
@@ -4204,7 +4168,7 @@ local LocalPlayer = Players.LocalPlayer
 local selectedPlayerName = nil
 local jogadorSelecionado = nil
 
--- Função para encontrar jogador pelo nome parcial
+-- FunÃ§Ã£o para encontrar jogador pelo nome parcial
 local function findPlayerByName(partialName)
     partialName = partialName:lower()
     for _, p in ipairs(Players:GetPlayers()) do
@@ -4231,10 +4195,10 @@ TabTroll:AddTextBox({
     end
 })
 
--- Variáveis para os loops
+-- VariÃ¡veis para os loops
 local bangLoop, faceLoop = nil, nil
 
--- Função genérica para desconectar loops
+-- FunÃ§Ã£o genÃ©rica para desconectar loops
 local function desconectarLoops()
     if bangLoop then bangLoop:Disconnect() bangLoop = nil end
     if faceLoop then faceLoop:Disconnect() faceLoop = nil end
@@ -4338,7 +4302,7 @@ TabTroll:AddToggle({
 
 TabTroll:AddToggle({
     Name = "Bang Face Fast (modo turbo)",
-    Description = "bote na cara do alvo lá ele",
+    Description = "bote na cara do alvo lÃ¡ ele",
     Default = false,
     Callback = function(Value)
         if faceFastLoop then 
@@ -4365,8 +4329,8 @@ TabTroll:AddToggle({
 
 
 TabTroll:AddToggle({
-    Name = "Bang Fast (ultra rápido frente e abaixo)",
-    Description = "modo turbo 😈",
+    Name = "Bang Fast (ultra rÃ¡pido frente e abaixo)",
+    Description = "modo turbo ðŸ˜ˆ",
     Default = false,
     Callback = function(Value)
         if bangFastLoop then 
@@ -4460,7 +4424,7 @@ Tab2:AddTextBox({
     end
 })
 
--- BotÃ£o: Teleportar para casa
+-- BotÃƒÂ£o: Teleportar para casa
 Tab2:AddButton({
     Name = "Teleport to the house",
     Description = "se transporta para a casa selcionada",
@@ -4475,7 +4439,7 @@ Tab2:AddButton({
     end
 })
 
--- BotÃ£o: Teleportar para o cofre
+-- BotÃƒÂ£o: Teleportar para o cofre
 Tab2:AddButton({
     Name = "Teleport to the vault",
     Description = "teleporte para o Mine Cofre da casa ( beta )",
@@ -4496,7 +4460,7 @@ Tab2:AddButton({
 -- Toggle: Noclip porta
 Tab2:AddToggle({
     Name = "Noclip through the house door",
-    Description = "Automaticamente deixa a porta da casa selecionada atravessável",
+    Description = "Automaticamente deixa a porta da casa selecionada atravessÃ¡vel",
     Default = false,
     Callback = function(Value)
         if not SelectHouse then return end
@@ -4600,7 +4564,7 @@ Tab2:AddButton({
 		else
 			game.StarterGui:SetCore("SendNotification", {
 				Title = "Nenhum Ban Encontrado",
-				Text = "Essa casa não possui nenhum ban ativo.",
+				Text = "Essa casa nÃ£o possui nenhum ban ativo.",
 				Duration = 5
 			})
 		end
