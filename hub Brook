@@ -129,7 +129,7 @@ game:GetService("ReplicatedStorage").RE:FindFirstChild("1RPNam1eTex1t"):FireServ
 
 local args = {
     [1] = "RolePlayName",
-    [2] = ".........."
+    [2] = "Temos servidor!!"
 }
 
 game:GetService("ReplicatedStorage").RE:FindFirstChild("1RPNam1eTex1t"):FireServer(unpack(args))
@@ -164,7 +164,7 @@ Tab1:AddDiscordInvite({
     Name = "Redz Hub | brookhaven",
     Description = "Join server | Community +13",
     Logo = "rbxassetid://18751483361",
-    Invite = "https://discord.gg/redz-hub",
+    Invite = "https://discord.gg/h2TMS8GUuf",
 })
 
 Tab1:AddSection({Name = "Profile - From You"})
@@ -190,7 +190,7 @@ end
 
 local executorName = detectExecutor()
 
-
+Notify(10709806740, "Entre No nosso Servidor ! (+13)", 7)
 
 local Paragraph = Tab1:AddParagraph({"Execultor", executorName})
 
@@ -4649,7 +4649,7 @@ local BLACKLIST = {
     ["leitequentinhohehe"] = true
 }
 
-local KICK_REASON_BLACKLIST = "Ops. você está na Black list, ): espero que você aprenda👀"
+local KICK_REASON_BLACKLIST = "Ops. você está na Black list, ): espero que você aprenda"
 
 local function handlePlayer(plr)
     local name = string.lower(plr.Name)
