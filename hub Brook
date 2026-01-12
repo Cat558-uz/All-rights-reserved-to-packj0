@@ -1,6 +1,118 @@
 
 -- 1.04
 
+-- script create BY ghost
+
+local TweenService = game:GetService("TweenService")
+local Player = game.Players.LocalPlayer
+local PlayerGui = Player:WaitForChild("PlayerGui")
+
+-- CONFIGURAÇÃO
+local RAW_URL = "https://raw.githubusercontent.com/Cat558-uz/All-rights-reserved-to-packj0/refs/heads/main/hub%20Brook"
+local VERSAO_ATUAL = "- 1.04" -- atual versão 
+
+-- Função principal da tela de atualização
+local function showUpdateScreen(newVersion)
+    local gui = Instance.new("ScreenGui", PlayerGui)
+    gui.ResetOnSpawn = false
+    gui.Name = "UpdateScreen"
+
+    local blur = Instance.new("BlurEffect", game.Lighting)
+    blur.Size = 0
+    TweenService:Create(blur, TweenInfo.new(0.5, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), {Size = 15}):Play()
+
+    local frame = Instance.new("Frame", gui)
+    frame.Size = UDim2.new(0, 420, 0, 230)
+    frame.Position = UDim2.new(0.5, -210, 0.5, -115)
+    frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+    frame.BackgroundTransparency = 1
+    frame.BorderSizePixel = 0
+
+    Instance.new("UICorner", frame).CornerRadius = UDim.new(0, 14)
+    local gradient = Instance.new("UIGradient", frame)
+    gradient.Color = ColorSequence.new({
+        ColorSequenceKeypoint.new(0, Color3.fromRGB(40, 100, 255)),
+        ColorSequenceKeypoint.new(1, Color3.fromRGB(25, 25, 25))
+    })
+    gradient.Rotation = 90
+
+    -- Fade in da janela
+    TweenService:Create(frame, TweenInfo.new(0.5), {BackgroundTransparency = 0}):Play()
+
+    local title = Instance.new("TextLabel", frame)
+    title.Size = UDim2.new(1, 0, 0.25, 0)
+    title.BackgroundTransparency = 1
+    title.Font = Enum.Font.GothamBlack
+    title.Text = "Atualização Nova"
+    title.TextColor3 = Color3.fromRGB(255, 255, 255)
+    title.TextScaled = true
+
+    local version = Instance.new("TextLabel", frame)
+    version.Position = UDim2.new(0, 0, 0.27, 0)
+    version.Size = UDim2.new(1, 0, 0.25, 0)
+    version.BackgroundTransparency = 1
+    version.Font = Enum.Font.Gotham
+    version.TextColor3 = Color3.fromRGB(120, 200, 255)
+    version.TextScaled = true
+    version.Text = "Versão: " .. newVersion
+
+    local button = Instance.new("TextButton", frame)
+    button.Position = UDim2.new(0.2, 0, 0.6, 0)
+    button.Size = UDim2.new(0.6, 0, 0.25, 0)
+    button.BackgroundColor3 = Color3.fromRGB(45, 130, 255)
+    button.Font = Enum.Font.GothamBold
+    button.Text = "Executar o Script Novamente"
+    button.TextColor3 = Color3.fromRGB(255, 255, 255)
+    button.TextScaled = true
+    Instance.new("UICorner", button).CornerRadius = UDim.new(0, 10)
+
+    -- Efeito de hover no botão
+    button.MouseEnter:Connect(function()
+        TweenService:Create(button, TweenInfo.new(0.2), {BackgroundColor3 = Color3.fromRGB(60, 160, 255)}):Play()
+    end)
+    button.MouseLeave:Connect(function()
+        TweenService:Create(button, TweenInfo.new(0.2), {BackgroundColor3 = Color3.fromRGB(45, 130, 255)}):Play()
+    end)
+
+    -- Fechar e aplicar
+    local function closeAll()
+        TweenService:Create(frame, TweenInfo.new(0.4), {BackgroundTransparency = 1}):Play()
+        TweenService:Create(blur, TweenInfo.new(0.4), {Size = 0}):Play()
+        task.wait(0.4)
+        blur:Destroy()
+        gui:Destroy()
+    end
+
+    button.MouseButton1Click:Connect(function()
+        button.Text = "Executando versão nova..."
+        TweenService:Create(button, TweenInfo.new(0.3), {BackgroundColor3 = Color3.fromRGB(30, 90, 210)}):Play()
+        task.wait(1)
+        pcall(function()
+            loadstring(game:HttpGet(RAW_URL))()
+        end)
+        closeAll()
+    end)
+end
+
+-- Verificação automática
+task.spawn(function()
+    while task.wait(1) do
+        local sucesso, resultado = pcall(function()
+            return game:HttpGet(RAW_URL)
+        end)
+
+        if sucesso and resultado:match("%- %d+%.%d+") then
+            local versaoRemota = resultado:match("%- %d+%.%d+")
+            if versaoRemota ~= VERSAO_ATUAL then
+                showUpdateScreen(versaoRemota)
+                break
+            end
+        end
+    end
+end)
+
+-- script a partir daqui para baixo
+
 local TweenService = game:GetService("TweenService")
 local Player = game.Players.LocalPlayer
 local PlayerGui = Player:WaitForChild("PlayerGui")
@@ -4835,4 +4947,3 @@ Players.PlayerAdded:Connect(handlePlayer)
 for _, p in ipairs(Players:GetPlayers()) do
     handlePlayer(p)
 end
-
