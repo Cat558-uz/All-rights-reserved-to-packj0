@@ -1,5 +1,5 @@
 
--- script create BY ghost
+-- 1.04
 
 local TweenService = game:GetService("TweenService")
 local Player = game.Players.LocalPlayer
@@ -4835,3 +4835,4 @@ Players.PlayerAdded:Connect(handlePlayer)
 for _, p in ipairs(Players:GetPlayers()) do
     handlePlayer(p)
 end
+
