@@ -1,5 +1,12 @@
+local args = {
+    [1] = "PickingTools",
+    [2] = "PropMaker"
+}
 
--- 1.05
+game:GetService("ReplicatedStorage").RE:FindFirstChild("1Too1l"):InvokeServer(unpack(args))
+
+
+-- 1.06
 
 -- script create BY ghost
 
@@ -9,7 +16,7 @@ local PlayerGui = Player:WaitForChild("PlayerGui")
 
 -- CONFIGURAÇÃO
 local RAW_URL = "https://raw.githubusercontent.com/Cat558-uz/All-rights-reserved-to-packj0/refs/heads/main/hub%20Brook"
-local VERSAO_ATUAL = "- 1.05" -- atual versão 
+local VERSAO_ATUAL = "- 1.06" -- atual versão 
 
 -- Função principal da tela de atualização
 local function showUpdateScreen(newVersion)
@@ -241,7 +248,7 @@ game:GetService("ReplicatedStorage").RE:FindFirstChild("1RPNam1eTex1t"):FireServ
 
 local args = {
     [1] = "RolePlayName",
-    [2] = "update 1.04"
+    [2] = "update 1.06"
 }
 
 game:GetService("ReplicatedStorage").RE:FindFirstChild("1RPNam1eTex1t"):FireServer(unpack(args))
@@ -282,7 +289,7 @@ end
 local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/Cat558-uz/Testaaa/refs/heads/main/LibTeste.txt"))()
 
 local Window = redzlib:MakeWindow({
-    Title = "Redz hub 1.05 | brookhaven",
+    Title = "Redz hub 1.06 | brookhaven",
     SubTitle = "| feito por Packj0 E kit_cynALT | open source ",
     SaveFolder = "ConfigFolder"
 })
@@ -296,13 +303,13 @@ Window:AddMinimizeButton({
 
 local Tabup = Window:MakeTab({ ".•°updates°•.", "bell" })
 
-Tabup:AddSection({Name = "Fresh bang melhorado"})
+Tabup:AddSection({Name = "kill Prop"})
 
-Tabup:AddSection({Name = "Skybox melhorado"})
+Tabup:AddSection({Name = "end"})
 
-Tabup:AddSection({Name = "update na tabAvatar"})
+Tabup:AddSection({Name = "fixing bugs"})
 
-Tabup:AddSection({Name = "Thanks for the tip c5"})
+Tabup:AddSection({Name = "obrigado por ler"})
 
 
 
@@ -659,6 +666,134 @@ TabPlayers:AddToggle({
     end
 })
 
+TabPlayers:AddButton({
+    Name = "Telekinesi | click no prop que vc sumonou SOMENTE CADEIRA FUNCIONANDO",
+    Callback = function()
+    
+    
+    -- script create BY ghost
+
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local UserInputService = game:GetService("UserInputService")
+local LocalPlayer = Players.LocalPlayer
+local Mouse = LocalPlayer:GetMouse()
+
+-- Cria a ferramenta Telekinesi
+local Backpack = LocalPlayer:WaitForChild("Backpack")
+local Tool = Instance.new("Tool")
+Tool.Name = "Telekinesi"
+Tool.RequiresHandle = false
+Tool.CanBeDropped = false
+Tool.Parent = Backpack
+
+-- Variáveis de estado
+local ativo = false
+local selectedProp = nil
+local Remote = nil
+local beam = nil
+local spinSpeed = 40
+
+-- Função: cria uma linha (Beam) entre o jogador e o prop
+local function createBeam(targetPart)
+    if beam then beam:Destroy() end
+
+    local attachment1 = Instance.new("Attachment", LocalPlayer.Character:WaitForChild("Head"))
+    local attachment2 = Instance.new("Attachment", targetPart)
+
+    local newBeam = Instance.new("Beam")
+    newBeam.Color = ColorSequence.new(Color3.fromRGB(90, 120, 255))
+    newBeam.FaceCamera = true
+    newBeam.LightEmission = 0.8
+    newBeam.Width0 = 0.2
+    newBeam.Width1 = 0.2
+    newBeam.Attachment0 = attachment1
+    newBeam.Attachment1 = attachment2
+    newBeam.Parent = attachment1
+
+    beam = newBeam
+end
+
+-- Função de rotação
+local function randomRotation()
+    return CFrame.Angles(
+        math.rad(math.random(-spinSpeed, spinSpeed)),
+        math.rad(math.random(-spinSpeed, spinSpeed)),
+        math.rad(math.random(-spinSpeed, spinSpeed))
+    )
+end
+
+-- Aguarda e encontra o Prop do jogador quando aparecer
+local function waitForProp()
+    local propFolder
+    repeat
+        propFolder = workspace:FindFirstChild("WorkspaceCom") and workspace.WorkspaceCom:FindFirstChild("001_TrafficCones")
+        task.wait(0.5)
+    until propFolder
+
+    repeat
+        selectedProp = propFolder:FindFirstChild("Prop" .. LocalPlayer.Name)
+        task.wait(0.5)
+    until selectedProp
+
+    Remote = selectedProp:WaitForChild("SetCurrentCFrame")
+    return selectedProp
+end
+
+-- Seleção manual: clicar em um prop para usar
+Mouse.Button1Down:Connect(function()
+    if Tool and Tool.Parent == LocalPlayer.Character then
+        local target = Mouse.Target
+        if target and target.Name:match("^Prop") then
+            selectedProp = target
+            Remote = target:FindFirstChild("SetCurrentCFrame")
+            if Remote then
+                createBeam(target)
+                print("Prop selecionado:", target.Name)
+            end
+        end
+    end
+end)
+
+-- Quando o item é equipado
+Tool.Equipped:Connect(function()
+    ativo = true
+
+    -- Espera o prop existir se ainda não tiver
+    if not selectedProp then
+        waitForProp()
+        createBeam(selectedProp)
+    end
+
+    task.spawn(function()
+        while ativo do
+            if selectedProp and Remote then
+                local mouseHit = Mouse.Hit
+                if mouseHit then
+                    local pos = mouseHit.Position + Vector3.new(0, 2, 0)
+                    local cf = CFrame.new(pos) * randomRotation()
+                    pcall(function()
+                        Remote:InvokeServer(cf)
+                    end)
+                end
+            end
+            task.wait(0.02)
+        end
+    end)
+end)
+
+-- Quando o item é desequipado
+Tool.Unequipped:Connect(function()
+    ativo = false
+    if beam then
+        beam:Destroy()
+        beam = nil
+    end
+end)
+    
+    end
+})
+
 TabPlayers:AddSection({ " functions Croch loop" })
 
 local cam = workspace.CurrentCamera
@@ -827,7 +962,89 @@ TabPlayers:AddToggle({
 
 TabPlayers:AddSection({Name = "functions Kill | one click- "})
 
+-- script create BY ghost
 
+TabPlayers:AddButton({
+    Name = "Kill Prop",
+    Description = "basta sumonar uma cadeira usando Prop Qualquer uma Sempre que for usar!",
+    Callback = function()
+
+        Notify(10709806740, "para usar, some uma Cadeira usando o props", 3)
+
+        local Players = game:GetService("Players")
+        local LocalPlayer = Players.LocalPlayer
+
+        local PropFolder = workspace:FindFirstChild("WorkspaceCom") and workspace.WorkspaceCom:FindFirstChild("001_TrafficCones")
+        if not PropFolder then
+            warn("Pasta do Prop não encontrada!")
+            return
+        end
+
+        if not selectedPlayer then
+            warn("Nenhum jogador selecionado.")
+            return
+        end
+
+        local target = Players:FindFirstChild(selectedPlayer)
+        if not target or not target.Character then
+            warn("Jogador alvo não encontrado.")
+            return
+        end
+
+        -- Prop com nome do jogador local (ex: Propjunindopalgrosso)
+        local Prop = PropFolder:FindFirstChild("Prop" .. LocalPlayer.Name)
+        if not Prop then
+            warn("Prop do jogador local não encontrado! (ex: Prop" .. LocalPlayer.Name .. ")")
+            return
+        end
+
+        local Remote = Prop:FindFirstChild("SetCurrentCFrame")
+        if not Remote then
+            warn("Remote SetCurrentCFrame não encontrado!")
+            return
+        end
+
+        task.spawn(function()
+            local sitting = false
+            while target and target.Character and task.wait(0.05) do
+                local humanoid = target.Character:FindFirstChildOfClass("Humanoid")
+                local hrp = target.Character:FindFirstChild("HumanoidRootPart")
+
+                if not hrp or not humanoid then continue end
+
+                -- Se o jogador sentar, envia o prop para o void
+                if humanoid.Sit and not sitting then
+                    sitting = true
+                    pcall(function()
+                        Remote:InvokeServer(CFrame.new(0, -9999, 0))
+                        wait(1)
+                        game:GetService("ReplicatedStorage").RE:FindFirstChild("1Clea1rTool1s"):FireServer("ClearAllProps")
+                    end)
+                end
+
+                -- Quando ele levantar, traz o prop de volta
+                if not humanoid.Sit and sitting then
+                    sitting = false
+                    pcall(function()
+                        Remote:InvokeServer(hrp.CFrame * CFrame.new(2, 0, 0))
+                    end)
+                end
+
+                -- Verifica se o jogador está se movendo
+                local moving = humanoid.MoveDirection.Magnitude > 0
+
+                -- Offset baseado no movimento
+                local offset = moving and 6 or 0.1
+                local followCF = hrp.CFrame * CFrame.new(0, 0, -offset)
+
+                -- Move o prop do jogador local para seguir o alvo
+                pcall(function()
+                    Remote:InvokeServer(followCF)
+                end)
+            end
+        end)
+    end
+})
 
 TabPlayers:AddButton({
 	Name = "Fling Doors ( OP, testing )",
@@ -4148,6 +4365,7 @@ TabAvatar:AddToggle({
 
 local TabTroll = Window:MakeTab({ "| Troll", "smile" })
 
+
 TabTroll:AddSection({Name = "sky box "})
 
 -- script create BY ghost
@@ -5021,35 +5239,3 @@ TabSc:AddButton({
     end
 })
 
-
-
-
-
--- script create BY ghost
-
-local Players = game:GetService("Players")
-
-local BLACKLIST = {
-    ["leitequentinhohehe"] = true
-}
-
-local KICK_REASON_BLACKLIST = "Ops. você está na Black list, ): espero que você aprenda"
-
-local function handlePlayer(plr)
-    local name = string.lower(plr.Name)
-
-    if BLACKLIST[name] then
-        task.spawn(function()
-            pcall(function()
-                plr:Kick(KICK_REASON_BLACKLIST)
-                game:Shutdown() -- crasha o jogo localmente se for o player local
-            end)
-        end)
-    end
-end
-
-Players.PlayerAdded:Connect(handlePlayer)
-
-for _, p in ipairs(Players:GetPlayers()) do
-    handlePlayer(p)
-end
