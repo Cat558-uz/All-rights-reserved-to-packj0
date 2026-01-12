@@ -129,16 +129,30 @@ game:GetService("ReplicatedStorage").RE:FindFirstChild("1RPNam1eTex1t"):FireServ
 
 local args = {
     [1] = "RolePlayName",
-    [2] = "Temos servidor!!"
+    [2] = "update 1.04"
 }
 
 game:GetService("ReplicatedStorage").RE:FindFirstChild("1RPNam1eTex1t"):FireServer(unpack(args))
 
+-- script create BY ghost
+-- Copia o conteúdo da variável 'text' para o clipboard (dependendo do executor)
+
+local text = "https://discord.gg/h2TMS8GUuf"
+
+if setclipboard then
+    setclipboard(text)
+    print(" Copiado (setclipboard).")
+elseif toclipboard then
+    toclipboard(text)
+    print(" Copiado (toclipboard).")
+else
+    warn("Nenhuma função de clipboard detectada no executor.")
+end
 
 local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/Cat558-uz/Testaaa/refs/heads/main/LibTeste.txt"))()
 
 local Window = redzlib:MakeWindow({
-    Title = "Redz hub ©™ | brookhaven",
+    Title = "Redz hub 1.04 | brookhaven",
     SubTitle = "| feito por Packj0 E kit_cynALT | open source ",
     SaveFolder = "ConfigFolder"
 })
@@ -152,7 +166,13 @@ Window:AddMinimizeButton({
 
 local Tabup = Window:MakeTab({ ".•°updates°•.", "bell" })
 
-Tabup:AddSection({Name = "notificações mais piquenas"})
+Tabup:AddSection({Name = "Fresh bang Modificado"})
+
+Tabup:AddSection({Name = "tabScripts"})
+
+Tabup:AddSection({Name = "update na Blacklist"})
+
+Tabup:AddSection({Name = "update Server discord"})
 
 
 
@@ -585,12 +605,102 @@ TabPlayers:AddToggle({
     end
 })
 
+
+-- script create BY ghost
+local cam = workspace.CurrentCamera
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+local flingActive = false
+
+TabPlayers:AddToggle({
+    Name = "fling Croch fast",
+    Description = "Versão rápida do fling Croch, gira mais rápido Em Grande Beta",
+    Default = false,
+    Callback = function(state)
+        flingActive = state
+        task.spawn(function()
+            while flingActive do
+                if selectedPlayer then
+                    local target = Players:FindFirstChild(selectedPlayer)
+                    if target and target.Character then
+                        local char = LocalPlayer.Character
+                        local root = char and char:FindFirstChild("HumanoidRootPart")
+                        local tRoot = target.Character:FindFirstChild("HumanoidRootPart")
+                        local tHum = target.Character:FindFirstChildOfClass("Humanoid")
+                        local hum = char and char:FindFirstChildOfClass("Humanoid")
+                        if root and tRoot and tHum and hum then
+                            local args = {[1]="ClearAllTools"}
+                            game:GetService("ReplicatedStorage").RE:FindFirstChild("1Clea1rTool1s"):FireServer(unpack(args))
+                            task.wait(0.2)
+                            game:GetService("ReplicatedStorage").RE:FindFirstChild("1Too1l"):InvokeServer("PickingTools","Couch")
+
+                            local original = root.CFrame
+                            local tool = LocalPlayer.Backpack:FindFirstChildOfClass("Tool")
+                            if tool then tool.Parent = char end
+
+                            workspace.FallenPartsDestroyHeight = -math.huge
+                            local bv = Instance.new("BodyVelocity")
+                            bv.Name = "FlingForce"
+                            bv.Velocity = Vector3.new(9e8,9e8,9e8)
+                            bv.MaxForce = Vector3.new(math.huge,math.huge,math.huge)
+                            bv.Parent = root
+
+                            hum:SetStateEnabled(Enum.HumanoidStateType.Seated,false)
+                            hum.PlatformStand = false
+                            cam.CameraSubject = tRoot
+
+                            local angle = 0
+                            while flingActive and target and target.Character and target.Character:FindFirstChildOfClass("Humanoid") do
+                                tHum = target.Character:FindFirstChildOfClass("Humanoid")
+                                tRoot = target.Character:FindFirstChild("HumanoidRootPart")
+                                if not tRoot or tHum.Sit or tRoot.Position.Y >= 70000 then break end
+
+                                local moveDir = tHum.MoveDirection
+                                local offset = Vector3.new(0,0,0)
+                                if moveDir.Magnitude >= 0.01 then
+                                    local speed = tHum.WalkSpeed
+                                    local studs = 13
+                                    if speed > 16 then studs = studs + math.floor((speed - 16) / 9) * 9 end
+                                    offset = moveDir.Unit * studs
+                                end
+
+                                angle += 90 -- gira mais rápido
+                                root.CFrame = CFrame.new(tRoot.Position + offset + Vector3.new(0, 1, 0)) * CFrame.Angles(math.rad(angle), 0, 0)
+                                root.Velocity = Vector3.new(9e8, 9e8, 9e8)
+                                root.RotVelocity = Vector3.new(9e8, 9e8, 9e8)
+                                task.wait(0.02) -- menor delay para spin mais veloz
+                            end
+
+                            bv:Destroy()
+                            hum:SetStateEnabled(Enum.HumanoidStateType.Seated,true)
+                            hum.PlatformStand = false
+                            root.CFrame = original
+                            cam.CameraSubject = hum
+
+                            for _, p in pairs(char:GetDescendants()) do
+                                if p:IsA("BasePart") then
+                                    p.Velocity = Vector3.zero
+                                    p.RotVelocity = Vector3.zero
+                                end
+                            end
+
+                            hum:UnequipTools()
+                            game:GetService("ReplicatedStorage").RE:FindFirstChild("1Too1l"):InvokeServer("PickingTools","Couch")
+                        end
+                    end
+                end
+                task.wait(0.2)
+            end
+        end)
+    end
+})
+
 TabPlayers:AddSection({Name = "functions Kill | one click- "})
 
 
 
 TabPlayers:AddButton({
-	Name = "Fling Doors ( OP, Beta )",
+	Name = "Fling Doors ( OP, testing )",
 	Description = "Fling Doors, fique perto das portas para funcionar melhor ( beta )",
 	Callback = function()
 
@@ -3989,7 +4099,7 @@ TabTroll:AddToggle({
 			task.spawn(function()
 				while LoopAnim do
 					PlayAnimation()
-					task.wait(0.1)
+					task.wait(0.05)
 				end
 			end)
 			task.delay(1.2, ApplyFreshBang)
@@ -4346,7 +4456,7 @@ TabTroll:AddToggle({
 })
 
 local Toggle = TabTroll:AddToggle({
-  Name = "Black Role",
+  Name = "Black Role not my",
   Description = "buraco negro",
   Default = false,
   Callback = function(Value)
@@ -4639,6 +4749,62 @@ Tab2:AddToggle({
         end
     end    
 })
+
+local TabSc = Window:MakeTab({ "| Scripts", "Script" })
+
+-- script create BY ghost
+TabSc:AddButton({
+    Name = "Coquette Hub | Exclusivo para Brookhaven",
+    Description = "Bom para Trolls, E Matar OTIMO!",
+    Callback = function()
+     
+     loadstring(game:HttpGet("https://rawscripts.net/raw/Brookhaven-RP-Coquette-Hub-58125"))()
+     
+    end
+})
+
+TabSc:AddButton({
+    Name = "Anti Bang Molestador | universal",
+    Description = "serve pra aquele tarado do cara que usa ;bang Denada",
+    Callback = function()
+     
+     loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Anti-Bang-Script-39958"))()
+     
+    end
+})
+
+TabSc:AddButton({
+    Name = "shiftlock Nao Arrastavel | universal",
+    Description = "Incrívelmente todos vê e serve para mobile/pc",
+    Callback = function()
+     
+     loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Shift-lock-perm-15576"))()
+     
+    end
+})
+
+TabSc:AddButton({
+    Name = "Invisivel Fe | universal",
+    Description = "ficar invisível mais o botao n e ARRASTAVEL e não troque o avatar invisível",
+    Callback = function()
+     
+     loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Invisible-FE-71311"))()
+     
+    end
+})
+
+TabSc:AddButton({
+    Name = "roubador de soms | universal",
+    Description = "quando ver um Sound ALL use ele para conseguir o id do som para usar KKK",
+    Callback = function()
+     
+     loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Ai-audio-logger-70978"))()
+     
+    end
+})
+
+
+
 
 
 -- script create BY ghost
