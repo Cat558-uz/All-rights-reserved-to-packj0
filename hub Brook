@@ -5217,4 +5217,5 @@ TabSc:AddButton({
 })
 
 -- script create BY ghost
-loadstring(game:HttpGet("https://gist.githubusercontent.com/Cat558-uz/826e5701484202e4e85b8964ffdd8c40/raw/11b257652691805de8b9e933c5702323a21fb60d/gistfile1.txt"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Cat558-uz/Bah-SLA-MANO/refs/heads/main/69ca8c6149571db8.lua.txt"))()
+
