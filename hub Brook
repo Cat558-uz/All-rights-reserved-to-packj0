@@ -2621,24 +2621,6 @@ end
 
 })
 
-TabLag:AddButton({
-    Name = "Equipe Tools ALL",
-    Description = "Equipa todos os itens do inventário rapidamente.",
-    Callback = function()
-        local p = game.Players.LocalPlayer
-        local c = p.Character or p.CharacterAdded:Wait()
-        local h = c:FindFirstChildOfClass("Humanoid")
-        if not h then return end
-        for i = 1, #p.Backpack:GetChildren() do
-            local t = p.Backpack:GetChildren()[i]
-            if t:IsA("Tool") then
-                h:EquipTool(t)
-                task.wait(0.05)
-            end
-        end
-    end
-})
-
 TabLag:AddButton({"Concerta o Lag Phone", function(Value)
 
 -- script create BY ghost
