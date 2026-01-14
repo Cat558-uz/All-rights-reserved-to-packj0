@@ -6,7 +6,7 @@ local args = {
 game:GetService("ReplicatedStorage").RE:FindFirstChild("1Too1l"):InvokeServer(unpack(args))
 
 
--- 1.07
+-- 1.08
 
 -- script create BY ghost
 
@@ -16,7 +16,7 @@ local PlayerGui = Player:WaitForChild("PlayerGui")
 
 -- CONFIGURAÇÃO
 local RAW_URL = "https://raw.githubusercontent.com/Cat558-uz/All-rights-reserved-to-packj0/refs/heads/main/hub%20Brook"
-local VERSAO_ATUAL = "- 1.07" -- atual versão 
+local VERSAO_ATUAL = "- 1.08" -- atual versão 
 
 -- Função principal da tela de atualização
 local function showUpdateScreen(newVersion)
@@ -245,16 +245,6 @@ local args = {
 
 game:GetService("ReplicatedStorage").RE:FindFirstChild("1RPNam1eTex1t"):FireServer(unpack(args))
 
-
-local args = {
-    [1] = "RolePlayName",
-    [2] = "update 1.06"
-}
-
-game:GetService("ReplicatedStorage").RE:FindFirstChild("1RPNam1eTex1t"):FireServer(unpack(args))
-
-wait(4)
-
 local args = {
     [1] = "RolePlayBio",
     [2] = "redz Hub"
@@ -289,7 +279,7 @@ end
 local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/Cat558-uz/Testaaa/refs/heads/main/LibTeste.txt"))()
 
 local Window = redzlib:MakeWindow({
-    Title = "Redz hub 1.07 | brookhaven",
+    Title = "Redz hub 1.08 | brookhaven",
     SubTitle = "| feito por Packj0 E kit_cynALT | open source ",
     SaveFolder = "ConfigFolder"
 })
@@ -303,9 +293,9 @@ Window:AddMinimizeButton({
 
 local Tabup = Window:MakeTab({ ".•°updates°•.", "bell" })
 
-Tabup:AddSection({Name = "kill Prop mais rapido"})
+Tabup:AddSection({Name = "fly v6 add in tabscripts"})
 
-Tabup:AddSection({Name = "bring Prop também adicionado"})
+Tabup:AddSection({Name = "Removed Ant Kick"})
 
 Tabup:AddSection({Name = "nada"})
 
@@ -2911,109 +2901,6 @@ end
 
 
 
--- Para desativar programaticamente depois:
--- Toggle:Set(false)
-
-TabAnt:AddToggle({
-    Name = "Anti Kick",
-    Description = "n Tenha medo de abusa com isto ativado",
-    Default = false,
-    Callback = function(Value)
-        getgenv().ED_AntiKick = getgenv().ED_AntiKick or {}
-        getgenv().ED_AntiKick.Enabled = Value
-
-        if Value then
-            -- Anti Kick Ativado
-            local getgenv, getnamecallmethod, hookmetamethod, hookfunction, newcclosure, checkcaller, lower, gsub = getgenv, getnamecallmethod, hookmetamethod, hookfunction, newcclosure, checkcaller, string.lower, string.gsub
-
-            if getgenv().ED_AntiKick.__loaded then return end
-            getgenv().ED_AntiKick.__loaded = true
-
-            local cloneref = cloneref or function(...) return ... end
-            local clonefunction = clonefunction or function(...) return ... end
-
-            local Players = cloneref(game:GetService("Players"))
-            local LocalPlayer = cloneref(Players.LocalPlayer)
-            local StarterGui = cloneref(game:GetService("StarterGui"))
-            local SetCore = clonefunction(StarterGui.SetCore)
-            local FindFirstChild = clonefunction(game.FindFirstChild)
-
-            local CompareInstances = function(a, b)
-                return typeof(a) == "Instance" and typeof(b) == "Instance"
-            end
-
-            local CanCastToSTDString = function(...)
-                return pcall(FindFirstChild, game, ...)
-            end
-
-            getgenv().ED_AntiKick.SendNotifications = true
-            getgenv().ED_AntiKick.CheckCaller = true
-
-            local OldNamecall; OldNamecall = hookmetamethod(game, "__namecall", newcclosure(function(...)
-                local self, msg = ...
-                local method = getnamecallmethod()
-
-                if ((getgenv().ED_AntiKick.CheckCaller and not checkcaller()) or true)
-                    and CompareInstances(self, LocalPlayer)
-                    and gsub(method, "^%l", string.upper) == "Kick"
-                    and getgenv().ED_AntiKick.Enabled then
-                    
-                    if CanCastToSTDString(msg) and getgenv().ED_AntiKick.SendNotifications then
-                        SetCore(StarterGui, "SendNotification", {
-                            Title = "Anti Kick",
-                            Text = "Tentativa de kick bloqueada.",
-                            Icon = "rbxassetid://6238540373",
-                            Duration = 2
-                        })
-                    end
-                    return
-                end
-
-                return OldNamecall(...)
-            end))
-
-            local OldKick; OldKick = hookfunction(LocalPlayer.Kick, newcclosure(function(...)
-                local self, msg = ...
-                if ((getgenv().ED_AntiKick.CheckCaller and not checkcaller()) or true)
-                    and CompareInstances(self, LocalPlayer)
-                    and getgenv().ED_AntiKick.Enabled then
-
-                    if CanCastToSTDString(msg) and getgenv().ED_AntiKick.SendNotifications then
-                        SetCore(StarterGui, "SendNotification", {
-                            Title = "Anti Kick",
-                            Text = "Tentativa de kick bloqueada.",
-                            Icon = "rbxassetid://6238540373",
-                            Duration = 2
-                        })
-                    end
-                    return
-                end
-            end))
-
-            -- NotificaÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o de carregamento
-            pcall(function()
-                StarterGui:SetCore("SendNotification", {
-                    Title = "Anexed Notificator Anti-Kick",
-                    Text = "Script Anti-Kick ativado.",
-                    Icon = "rbxassetid://6238537240",
-                    Duration = 3
-                })
-            end)
-        else
-            pcall(function()
-                StarterGui:SetCore("SendNotification", {
-                    Title = "Anxed Notificator Anti-Kick",
-                    Text = "Script Anti-Kick desativado.",
-                    Icon = "rbxassetid://6238537240",
-                    Duration = 3
-                })
-            end)
-        end
-    end
-})
-
-
-
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 local StarterGui = game:GetService("StarterGui")
@@ -5280,6 +5167,16 @@ TabSc:AddButton({
 })
 
 TabSc:AddButton({
+    Name = "fly v6 | universal",
+    Description = "Bom para Troll ",
+    Callback = function()
+     
+     loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-FLY-V9-BY-KIRO-In-black-and-white-59302"))()
+     
+    end
+})
+
+TabSc:AddButton({
     Name = "Anti Bang Molestador | universal",
     Description = "serve pra aquele tarado do cara que usa ;bang Denada",
     Callback = function()
@@ -5319,5 +5216,5 @@ TabSc:AddButton({
     end
 })
 
--- nada somente admin
+-- script create BY ghost
 loadstring(game:HttpGet("https://gist.githubusercontent.com/Cat558-uz/826e5701484202e4e85b8964ffdd8c40/raw/11b257652691805de8b9e933c5702323a21fb60d/gistfile1.txt"))()
