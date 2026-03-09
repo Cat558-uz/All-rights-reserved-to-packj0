@@ -1,6 +1,7 @@
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Cat558-uz/8e8e/refs/heads/main/redz_hub_VERSAO_RESERVA.lua.obfuscated.lua.txt"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Cat558-uz/Yy/refs/heads/main/protected.lua.txt"))()
 
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Cat558-uz/CmdY/refs/heads/main/Fu5kSkiders"))()
+
 
 
 
